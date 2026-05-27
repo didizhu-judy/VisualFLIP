@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="static/css/styles.css?v=5" />
+    <link rel="stylesheet" href="static/css/styles.css?v=6" />
   </head>
   <body>
 
@@ -72,91 +72,43 @@
           </div>
         </div>
 
-        <div class="hero-anim" aria-label="VisualFLIP evidence flip animation">
+        <div class="hero-anim evidence-board" aria-label="VisualFLIP paired evidence preview">
           <div class="anim-topline">
-            <span><span class="i18n" data-lang="en">Same question</span><span class="i18n" data-lang="zh">同一问题</span></span>
-            <strong><span class="i18n" data-lang="en">How many red markers?</span><span class="i18n" data-lang="zh">红色标记有几个？</span></strong>
+            <span><span class="i18n" data-lang="en">Same question, flipped evidence</span><span class="i18n" data-lang="zh">同一问题，证据翻转</span></span>
+            <strong><span class="i18n" data-lang="en">Prediction should move with the image.</span><span class="i18n" data-lang="zh">预测应当随图像证据变化。</span></strong>
           </div>
 
-          <svg class="flip-system" viewBox="0 0 920 420" role="img" aria-labelledby="flip-title flip-desc">
-            <title id="flip-title">A task-critical visual edit flips the gold answer while the model repeats itself.</title>
-            <desc id="flip-desc">The original image has four red markers. The edited image removes one marker so the gold answer becomes three. The model outputs four on both images, producing a collapse.</desc>
-            <defs>
-              <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
-                <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#131412" flood-opacity="0.18"/>
-              </filter>
-              <linearGradient id="scanGradient" x1="0" x2="1">
-                <stop offset="0" stop-color="#08a6a6" stop-opacity="0"/>
-                <stop offset="0.48" stop-color="#08a6a6" stop-opacity="0.82"/>
-                <stop offset="1" stop-color="#08a6a6" stop-opacity="0"/>
-              </linearGradient>
-              <pattern id="tileGrid" width="22" height="22" patternUnits="userSpaceOnUse">
-                <path d="M22 0H0V22" fill="none" stroke="#dfe4df" stroke-width="1"/>
-              </pattern>
-            </defs>
+          <div class="evidence-stage">
+            <div class="evidence-media">
+              <img src="static/images/motivating_example.png" alt="A VisualFLIP paired example where the model keeps the same answer after a task-critical edit" />
+              <div class="media-label">
+                <span class="i18n" data-lang="en">paired example</span><span class="i18n" data-lang="zh">配对样例</span>
+              </div>
+            </div>
 
-            <rect class="stage-bg" x="0" y="0" width="920" height="420" rx="8"/>
-            <rect class="image-panel" x="42" y="82" width="250" height="220" rx="8" filter="url(#softShadow)"/>
-            <rect class="image-panel edited-panel" x="335" y="82" width="250" height="220" rx="8" filter="url(#softShadow)"/>
-            <rect class="model-panel" x="642" y="82" width="236" height="220" rx="8" filter="url(#softShadow)"/>
+            <div class="evidence-summary">
+              <div class="summary-card gold-card">
+                <span class="summary-kicker"><span class="i18n" data-lang="en">Gold answer</span><span class="i18n" data-lang="zh">标准答案</span></span>
+                <strong><span class="answer-from">B</span><span class="arrow-text">→</span><span class="answer-to">E</span></strong>
+                <small><span class="i18n" data-lang="en">task-critical edit flips the label</span><span class="i18n" data-lang="zh">任务关键编辑使标签翻转</span></small>
+              </div>
 
-            <text class="svg-label" x="64" y="122">original image</text>
-            <text class="svg-label" x="357" y="122">edited image</text>
-            <text class="svg-label" x="664" y="122">model trace</text>
+              <div class="summary-card model-card">
+                <span class="summary-kicker"><span class="i18n" data-lang="en">Model answer</span><span class="i18n" data-lang="zh">模型答案</span></span>
+                <strong>B<span class="arrow-text">→</span>B</strong>
+                <small><span class="i18n" data-lang="en">prediction repeats instead of updating</span><span class="i18n" data-lang="zh">预测重复，而非更新</span></small>
+              </div>
 
-            <rect class="mini-grid" x="68" y="142" width="196" height="116" rx="6"/>
-            <rect class="mini-grid" x="361" y="142" width="196" height="116" rx="6"/>
-
-            <g class="tokens original-tokens">
-              <circle cx="114" cy="178" r="17"/>
-              <circle cx="171" cy="178" r="17"/>
-              <circle cx="228" cy="178" r="17"/>
-              <circle cx="171" cy="222" r="17"/>
-            </g>
-            <g class="tokens edited-tokens">
-              <circle cx="407" cy="178" r="17"/>
-              <circle cx="464" cy="178" r="17"/>
-              <circle cx="521" cy="178" r="17"/>
-              <circle class="removed-token" cx="464" cy="222" r="17"/>
-            </g>
-            <circle class="ghost-token" cx="464" cy="222" r="17"/>
-
-            <rect class="scan-beam scan-original" x="68" y="142" width="42" height="116" rx="6"/>
-            <rect class="scan-beam scan-edited" x="361" y="142" width="42" height="116" rx="6"/>
-            <path class="edit-arrow" d="M302 192H323"/>
-            <path class="edit-arrow-head" d="M322 184L333 192L322 200"/>
-            <text class="svg-chip" x="296" y="226">critical edit</text>
-
-            <g class="gold gold-original">
-              <text class="metric-label" x="76" y="286">gold</text>
-              <text class="metric-value" x="128" y="286">4</text>
-            </g>
-            <g class="gold gold-edited">
-              <text class="metric-label" x="369" y="286">gold</text>
-              <text class="metric-value gold-before" x="421" y="286">4</text>
-              <text class="metric-value gold-after" x="421" y="286">3</text>
-            </g>
-
-            <g class="model-output output-original">
-              <rect x="670" y="143" width="180" height="48" rx="8"/>
-              <text class="metric-label" x="690" y="174">pred original</text>
-              <text class="answer-ok" x="805" y="174">4 ✓</text>
-            </g>
-            <g class="model-output output-edited">
-              <rect x="670" y="211" width="180" height="48" rx="8"/>
-              <text class="metric-label" x="690" y="242">pred edited</text>
-              <text class="answer-bad" x="805" y="242">4 ×</text>
-            </g>
-            <path class="same-answer-line" d="M805 186C805 198 805 204 805 216"/>
-            <g class="collapse-badge">
-              <rect x="686" y="280" width="148" height="36" rx="18"/>
-              <text x="760" y="303">COLLAPSE</text>
-            </g>
-          </svg>
+              <div class="collapse-pill">
+                <span>CR</span>
+                <strong><span class="i18n" data-lang="en">collapse</span><span class="i18n" data-lang="zh">坍塌</span></strong>
+              </div>
+            </div>
+          </div>
 
           <p class="anim-caption">
-            <span class="i18n" data-lang="en">The image evidence flips from four to three, but the prediction stays at four. VisualFLIP turns that update failure into a pair-level metric.</span>
-            <span class="i18n" data-lang="zh">图像证据从 4 翻到 3，但预测仍停在 4。VisualFLIP 将这种更新失败转化为配对级指标。</span>
+            <span class="i18n" data-lang="en">VisualFLIP asks the same question on an original and edited image. If the gold answer changes but the model repeats itself, the pair exposes an evidence-update failure.</span>
+            <span class="i18n" data-lang="zh">VisualFLIP 在原图和编辑图上询问同一个问题。若标准答案已变化但模型仍重复原答案，这一配对就暴露了证据更新失败。</span>
           </p>
         </div>
 

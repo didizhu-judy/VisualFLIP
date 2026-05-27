@@ -10,7 +10,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Data: CC BY 4.0](https://img.shields.io/badge/Data-CC%20BY%204.0-blue.svg)](DATA_LICENSE)
 
-<img src="examples/teaser.png" width="780"/>
+<img src="examples/teaser.png" width="1000"/>
 
 </div>
 
