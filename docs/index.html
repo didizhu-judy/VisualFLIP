@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VisualFLIP — Do Predictions Depend on Task-Critical Visual Evidence in Multimodal Reasoning?</title>
+    <meta name="description" content="A paired benchmark of 687 same-question image flips that tests whether multimodal LLM predictions update when the task-critical visual evidence changes. Pair accuracy and Collapse Rate across 24 frontier MLLMs." />
+    <meta name="theme-color" content="#b8410f" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="VisualFLIP — Do Predictions Depend on Task-Critical Visual Evidence?" />
+    <meta property="og:description" content="Paired benchmark for answer-updating under task-critical visual edits. 687 same-question flips; 24 MLLMs evaluated." />
+    <meta property="og:image" content="https://didizhu-judy.github.io/VisualFLIP/static/images/teaser.png" />
+    <meta property="og:url" content="https://didizhu-judy.github.io/VisualFLIP/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="static/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="static/css/styles.css?v=4" />
+  </head>
+  <body>
+
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a href="#" class="topbar-brand">VisualFLIP<span class="dot">.</span></a>
+        <div class="topbar-actions">
+          <a href="https://github.com/didizhu-judy/VisualFLIP" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://huggingface.co/datasets/didizhu-judy/VisualFLIP" target="_blank" rel="noopener">Dataset</a>
+          <a href="https://huggingface.co/spaces/didizhu-judy/VisualFLIP" target="_blank" rel="noopener">Browse</a>
+          <button id="lang-toggle" type="button" aria-label="Switch language">中文</button>
+          <button id="theme-toggle" type="button" aria-label="Switch theme">Dark</button>
+        </div>
+      </div>
+    </header>
+
+    <article class="page">
+
+      <!-- ============================ HERO ============================ -->
+      <div class="hero">
+      <div class="eyebrow">
+        <span class="i18n" data-lang="en">A paired benchmark for multimodal reasoning</span><span class="i18n" data-lang="zh">面向多模态推理的配对基准</span>
+      </div>
+      <h1 class="title">VisualFLIP: Do Predictions Depend on Task-Critical Visual Evidence in Multimodal Reasoning?</h1>
+
+      <p class="byline">
+        <a href="mailto:dzhu@ic.ac.uk">Didi Zhu</a>, Changrui Chen, Stefanos Zafeiriou, Jiankang Deng
+      </p>
+      <p class="affil">Imperial College London</p>
+      <p class="stamp">
+        <span class="i18n" data-lang="en">Released May 2026 · v1.0.0</span><span class="i18n" data-lang="zh">2026 年 5 月发布 · v1.0.0</span>
+      </p>
+
+      <p class="lede">
+        <span class="i18n" data-lang="en">VisualFLIP recasts visual-reasoning evaluation as an <em>answer-updating</em> test. Each item is a pair of images sharing the same question; a minimal task-critical edit deterministically flips the gold answer. We report pair accuracy (Acc<sub>p</sub>) and a symmetric Collapse Rate (CR) across 24 frontier MLLMs.</span>
+        <span class="i18n" data-lang="zh">VisualFLIP 把视觉推理评测重塑为一个"答案是否会随证据更新"的测试。每个样本是两张图共享同一问题；一个对任务关键的最小化编辑使标准答案确定性翻转。我们在 24 个前沿 MLLM 上报告配对准确率（Acc<sub>p</sub>）与对称坍塌率（CR）。</span>
+      </p>
+
+      <div class="link-row">
+        <a href="https://github.com/didizhu-judy/VisualFLIP" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+          <span class="i18n" data-lang="en">Code</span><span class="i18n" data-lang="zh">代码</span>
+        </a>
+        <a href="https://huggingface.co/datasets/didizhu-judy/VisualFLIP" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
+          <span class="i18n" data-lang="en">Dataset</span><span class="i18n" data-lang="zh">数据集</span>
+        </a>
+        <a href="https://huggingface.co/spaces/didizhu-judy/VisualFLIP" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span class="i18n" data-lang="en">Browse pairs</span><span class="i18n" data-lang="zh">浏览样本</span>
+        </a>
+        <!-- Paper button: uncomment when arXiv ID exists.
+        <a href="https://arxiv.org/abs/<id>" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span class="i18n" data-lang="en">Paper</span><span class="i18n" data-lang="zh">论文</span>
+        </a>
+        -->
+      </div>
+
+      <!-- Concept animation: a paired flip where the model's prediction fails to update -->
+      <div class="hero-anim" data-reveal aria-hidden="true">
+
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+          <defs>
+            <!-- Realistic apple glyph (red body + green leaf + stem) -->
+            <symbol id="apple" viewBox="0 0 40 44">
+              <path d="M27 8 Q26 4 22 5 L20 8" stroke="#5a4a2a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+              <path d="M26 8 Q33 4 36 9 Q33 13 27 11 Z" fill="#7fb05a"/>
+              <ellipse cx="20" cy="26" rx="14" ry="15" fill="#dc4a2c"/>
+              <ellipse cx="20" cy="26" rx="14" ry="15" fill="url(#appleShade)"/>
+              <ellipse cx="14" cy="20" rx="3" ry="4" fill="#ffc4b0" opacity="0.55"/>
+            </symbol>
+            <radialGradient id="appleShade" cx="0.65" cy="0.7" r="0.65">
+              <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
+              <stop offset="100%" stop-color="rgba(80,18,8,0.35)"/>
+            </radialGradient>
+            <!-- Loupe (magnifier) -->
+            <symbol id="loupe" viewBox="0 0 24 24">
+              <circle cx="10" cy="10" r="7" fill="rgba(208,74,26,0.08)" stroke="#d04a1a" stroke-width="1.6"/>
+              <line x1="15" y1="15" x2="21" y2="21" stroke="#d04a1a" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="10" cy="10" r="2" fill="#d04a1a"/>
+            </symbol>
+          </defs>
+        </svg>
+
+        <div class="anim-grid">
+          <!-- LEFT: original image -->
+          <div class="anim-card">
+            <div class="anim-fig">
+              <svg class="apple-svg"><use href="#apple"/></svg>
+              <svg class="apple-svg"><use href="#apple"/></svg>
+              <svg class="apple-svg"><use href="#apple"/></svg>
+              <svg class="apple-svg"><use href="#apple"/></svg>
+              <svg class="loupe-svg pass-orig"><use href="#loupe"/></svg>
+            </div>
+            <div class="anim-tag">Original Image</div>
+            <div class="anim-row-gold">
+              <span class="anim-gold-label">gold</span>
+              <span class="anim-gold-val">4</span>
+            </div>
+          </div>
+
+          <!-- MIDDLE: the edit operator -->
+          <div class="anim-edit">
+            <div class="edit-flow">
+              <div class="edit-arrow"></div>
+              <div class="edit-label">
+                <span class="i18n" data-lang="en">task-critical edit</span><span class="i18n" data-lang="zh">关键编辑</span>
+              </div>
+              <div class="edit-arrow"></div>
+            </div>
+          </div>
+
+          <!-- RIGHT: edited image -->
+          <div class="anim-card edited">
+            <div class="anim-fig">
+              <svg class="apple-svg"><use href="#apple"/></svg>
+              <svg class="apple-svg"><use href="#apple"/></svg>
+              <svg class="apple-svg"><use href="#apple"/></svg>
+              <svg class="apple-svg poof"><use href="#apple"/></svg>
+              <svg class="loupe-svg pass-edit"><use href="#loupe"/></svg>
+            </div>
+            <div class="anim-tag">Edited Image</div>
+            <div class="anim-row-gold flips">
+              <span class="anim-gold-label">gold</span>
+              <span class="anim-gold-val gold-from">4</span>
+              <span class="anim-gold-val gold-to">3</span>
+              <span class="anim-flip-mark">↺ flips</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ANSWER RAIL beneath cards: pred_o vs pred_e + verdict -->
+        <div class="anim-rail">
+          <div class="rail-cell">
+            <span class="rail-tag">pred<sub>o</sub></span>
+            <span class="rail-val correct">4 ✓</span>
+          </div>
+          <div class="rail-connector">
+            <span class="connector-line"></span>
+            <span class="connector-label">same answer</span>
+            <span class="connector-line"></span>
+          </div>
+          <div class="rail-cell">
+            <span class="rail-tag">pred<sub>e</sub></span>
+            <span class="rail-val stuck">4 ✗</span>
+          </div>
+        </div>
+
+        <div class="anim-verdict">
+          <span class="verdict-mark">◆</span>
+          <span class="verdict-label">COLLAPSE</span>
+          <span class="verdict-text"><span class="i18n" data-lang="en">prediction did not update under the task-critical edit</span><span class="i18n" data-lang="zh">关键编辑下，预测没有更新</span></span>
+        </div>
+
+        <p class="anim-caption">
+          <span class="i18n" data-lang="en"><em>"How many apples are in the picture?"</em> — the right image removes one apple, flipping the gold to 3. The model answers 4 on both: a collapse.</span>
+          <span class="i18n" data-lang="zh"><em>"图中有几个苹果？"</em> — 右图去掉一个苹果，标准答案翻转为 3。模型两次都答 4，即坍塌。</span>
+        </p>
+      </div>
+
+      <!-- Stat strip — three big serif numerals -->
+      <div class="stat-strip" data-reveal>
+        <div>
+          <div class="stat-num" data-count="687">0</div>
+          <div class="stat-lab"><span class="i18n" data-lang="en">paired flips</span><span class="i18n" data-lang="zh">配对样本</span></div>
+        </div>
+        <div class="sep"></div>
+        <div>
+          <div class="stat-num" data-count="24">0</div>
+          <div class="stat-lab"><span class="i18n" data-lang="en">MLLMs evaluated</span><span class="i18n" data-lang="zh">参评模型</span></div>
+        </div>
+        <div class="sep"></div>
+        <div>
+          <div class="stat-num"><span data-count="4">0</span><em>×</em></div>
+          <div class="stat-lab"><span class="i18n" data-lang="en">perturbation categories</span><span class="i18n" data-lang="zh">扰动类别</span></div>
+        </div>
+      </div>
+
+      </div><!-- /.hero -->
+
+      <!-- ============================ OVERVIEW ============================ -->
+      <section id="overview" data-reveal>
+        <div class="section-head">
+          <span class="section-meta">01 / <span class="i18n" data-lang="en">Overview</span><span class="i18n" data-lang="zh">概览</span></span>
+          <h2><span class="i18n" data-lang="en">A correct answer is not always a grounded one.</span><span class="i18n" data-lang="zh">答对，未必意味着有据。</span></h2>
+        </div>
+
+        <p>
+          <span class="i18n" data-lang="en">Modern multimodal LLMs answer many visual-reasoning questions correctly. But single-image accuracy can hide answers that are <em>not</em> driven by the visual evidence — driven instead by language priors, memorized regularities, or whatever a confident reasoning chain happens to settle on. VisualFLIP turns this into a behavioral test.</span>
+          <span class="i18n" data-lang="zh">现代多模态大模型能答对很多视觉推理题。但单图准确率会掩盖那些<em>并非</em>依赖视觉证据的答案——它们可能源自语言先验、记忆的规律，或一段听上去自洽的推理链恰好落到的位置。VisualFLIP 把这件事变成一个行为测试。</span>
+        </p>
+
+        <p>
+          <span class="i18n" data-lang="en"><strong>One pair = one question, two images.</strong> The second image makes a minimal task-critical edit that deterministically flips the gold answer. A prediction sensitive to the evidence should change between the two; a prediction that repeats the same answer despite the gold flipping <em>collapses</em>. The benchmark is behavioural — it measures whether predictions move with the evidence, not the internal mechanism behind any individual answer.</span>
+          <span class="i18n" data-lang="zh"><strong>一对样本 = 一个问题，两张图。</strong>第二张图做一个对任务关键的最小化编辑，使标准答案确定性翻转。对证据敏感的预测应当随之改变；若两张图给出相同答案而标准答案已翻转，则发生<em>坍塌</em>。这是一个行为基准——它衡量预测是否随证据更新，并不主张任何关于内部机制的结论。</span>
+        </p>
+
+        <figure>
+          <img src="static/images/teaser.png" alt="VisualFLIP composition and evaluation modes" />
+          <figcaption>
+            <span class="i18n" data-lang="en"><strong>Figure 1. Composition and evaluation modes.</strong> <em>Left:</em> sample distribution across four perturbation categories and nine task types. <em>Right:</em> pair accuracy for representative MLLMs under independent (light) and sequential (dark) evaluation — prior-answer exposure reduces pair accuracy for several capable systems.</span>
+            <span class="i18n" data-lang="zh"><strong>图 1. 构成与评测模式。</strong><em>左：</em>四类扰动 × 九个任务类型的样本分布。<em>右：</em>代表性 MLLM 在独立（浅色）与序列（深色）模式下的配对准确率——序列设置下"先前答案暴露"使多个能力较强系统的 Acc<sub>p</sub> 下降。</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ============================ MOTIVATING EXAMPLE ============================ -->
+      <section id="example" data-reveal>
+        <div class="section-head">
+          <span class="section-meta">02 / <span class="i18n" data-lang="en">Motivating example</span><span class="i18n" data-lang="zh">启发性示例</span></span>
+          <h2><span class="i18n" data-lang="en">Correct on the original, unchanged on the edit.</span><span class="i18n" data-lang="zh">原图答对，编辑后却不变。</span></h2>
+        </div>
+
+        <figure>
+          <img src="static/images/motivating_example.png" alt="Motivating example — paired flip with unchanged prediction" />
+          <figcaption>
+            <span class="i18n" data-lang="en"><strong>Figure 2. Motivating example.</strong> The model answers correctly while its reasoning contains counting errors. After a task-critical edit flips the ground truth, the answer <em>stays fixed</em>, revealing an update failure not captured by a single-image correctness check.</span>
+            <span class="i18n" data-lang="zh"><strong>图 2. 启发性示例。</strong>模型答对了，但写出的推理含计数错误。当一个对任务关键的编辑使标准答案翻转后，预测仍然<em>原封不动</em>——这是单图准确率根本看不见的失败模式。</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ============================ METRICS ============================ -->
+      <section id="metrics" data-reveal>
+        <div class="section-head">
+          <span class="section-meta">03 / <span class="i18n" data-lang="en">Metrics</span><span class="i18n" data-lang="zh">评测指标</span></span>
+          <h2><span class="i18n" data-lang="en">Pair accuracy and Collapse Rate.</span><span class="i18n" data-lang="zh">配对准确率与坍塌率。</span></h2>
+        </div>
+
+        <p>
+          <span class="i18n" data-lang="en">Two pair-level numbers carry the report; a third is reported on the controls.</span>
+          <span class="i18n" data-lang="zh">我们用两个配对级别的指标作为主报告，再在对照样本上报告第三个。</span>
+        </p>
+
+        <h3>Acc<sub>p</sub> — <span class="i18n" data-lang="en">pair accuracy</span><span class="i18n" data-lang="zh">配对准确率</span></h3>
+        <p>
+          <span class="i18n" data-lang="en">The model must solve <em>both</em> sides of a pair to score. Direction-free, paired analog of single-image accuracy. Higher is better.</span>
+          <span class="i18n" data-lang="zh">必须两侧都答对才计分；配对设置下方向无关的准确率类比。越高越好。</span>
+        </p>
+
+        <h3>CR — <span class="i18n" data-lang="en">Collapse Rate</span><span class="i18n" data-lang="zh">坍塌率</span></h3>
+        <p>
+          <span class="i18n" data-lang="en">Of the pairs the model solves on at least one side, the fraction where it gives the <em>same</em> non-empty answer to both images despite the gold flipping. Low CR is consistent with predictions that move with the task-critical evidence; high CR shows the prediction failed to update. Lower is better.</span>
+          <span class="i18n" data-lang="zh">在模型至少一侧答对的样本中，两侧给出<em>相同</em>非空答案、但标准答案已翻转的比例。CR 低意味着预测随任务关键证据而变化；CR 高则表示预测未更新。越低越好。</span>
+        </p>
+
+        <h3>S / F — <span class="i18n" data-lang="en">control preservation / false-flip</span><span class="i18n" data-lang="zh">对照保持率 / 误翻率</span></h3>
+        <p>
+          <span class="i18n" data-lang="en">On the 140 pairs that ship an <code>irrelevant_image</code> arm (templates <code>hard_dense_count</code>, <code>attr_dense_color_count</code>, <code>layer_order</code>): <em>S</em> = the prediction stayed when the irrelevant edit didn't change the gold (higher is better), <em>F</em> = the prediction changed anyway (lower is better).</span>
+          <span class="i18n" data-lang="zh">在带有 <code>irrelevant_image</code> 对照臂的 140 对样本上（模板：<code>hard_dense_count</code>、<code>attr_dense_color_count</code>、<code>layer_order</code>）：<em>S</em>=无关编辑下答案保持（越高越好），<em>F</em>=无关编辑下答案改变（越低越好）。</span>
+        </p>
+
+        <h3><span class="i18n" data-lang="en">Evaluation protocol (independent mode)</span><span class="i18n" data-lang="zh">评测协议（独立模式）</span></h3>
+        <p>
+          <span class="i18n" data-lang="en">For every pair, the <strong>same question</strong> is asked on the original and edited images as <strong>two separate completions</strong> — not a multi-turn conversation. The prompt forces an answer tag, and the extractor falls back through <code>&lt;answer&gt;</code> → <code>\boxed{}</code> → trailing letter (A–E) or integer.</span>
+          <span class="i18n" data-lang="zh">每对样本，<strong>同一问题</strong>分别在原图与编辑图上以<strong>两次独立的请求</strong>询问，而非多轮对话。提示强制要求答案标签，抽取顺序为 <code>&lt;answer&gt;</code> → <code>\boxed{}</code> → 末行尾部字母（A–E）或整数。</span>
+        </p>
+      </section>
+
+      <!-- ============================ COMPOSITION ============================ -->
+      <section id="composition" data-reveal>
+        <div class="section-head">
+          <span class="section-meta">04 / <span class="i18n" data-lang="en">Composition</span><span class="i18n" data-lang="zh">数据集构成</span></span>
+          <h2><span class="i18n" data-lang="en">687 pairs across four categories and fourteen templates.</span><span class="i18n" data-lang="zh">687 对样本，4 个类别，14 个模板。</span></h2>
+        </div>
+
+        <figure>
+          <img src="static/images/dataset_overview.png" alt="Perturbation types in VisualFLIP" />
+          <figcaption>
+            <span class="i18n" data-lang="en"><strong>Figure 3. Perturbation types.</strong> VisualFLIP groups perturbations into four categories: <em>Cardinality Shift</em> alters object counts; <em>Spatial Transformation</em> changes positions or orientations; <em>Attribute Mutation</em> modifies visual properties such as color, shape, or value; <em>Logic Re-mapping</em> inverts logical relationships.</span>
+            <span class="i18n" data-lang="zh"><strong>图 3. 扰动类型。</strong>VisualFLIP 将扰动分为四类：<em>计数变化</em>改变物体数量；<em>空间变换</em>改变位置或朝向；<em>属性突变</em>修改颜色、形状或数值等视觉属性；<em>逻辑重映射</em>反转逻辑关系。</span>
+          </figcaption>
+        </figure>
+
+        <div class="table-wrap">
+          <table class="data">
+            <thead>
+              <tr>
+                <th><span class="i18n" data-lang="en">Category</span><span class="i18n" data-lang="zh">类别</span></th>
+                <th class="num">Synthetic</th>
+                <th class="num">Real</th>
+                <th class="num">Total</th>
+                <th><span class="i18n" data-lang="en">Synthetic templates</span><span class="i18n" data-lang="zh">合成模板</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Cardinality</td><td class="num">115</td><td class="num">31</td><td class="num"><strong>146</strong></td><td><code>hard_dense_count</code> · <code>hard_dense_5panel</code> · <code>stem_count_match</code> · <code>stem_sum_match</code></td></tr>
+              <tr><td>Attribute</td>  <td class="num">200</td><td class="num">73</td><td class="num"><strong>273</strong></td><td><code>color_connectivity</code> · <code>attr_dense_5panel</code> · <code>attr_dense_color_count</code></td></tr>
+              <tr><td>Spatial</td>    <td class="num">115</td><td class="num">35</td><td class="num"><strong>150</strong></td><td><code>layer_order</code> · <code>nested_containment</code> · <code>maze_path</code></td></tr>
+              <tr><td>Logic</td>      <td class="num">85</td> <td class="num">33</td><td class="num"><strong>118</strong></td><td><code>logic_set_count</code> · <code>narrative_multi</code> · <code>logic_arrow_path</code></td></tr>
+              <tr class="totals"><td><strong>Total</strong></td><td class="num"><strong>515</strong></td><td class="num"><strong>172</strong></td><td class="num"><strong>687</strong></td><td>13 templates + 1 real-image set (MathVision)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="margin-top:18px;color:var(--fg-mute);font-size:14px;">
+          <span class="i18n" data-lang="en">140 of the 687 pairs additionally carry an <code>irrelevant_image</code> control arm to test answer stability under non-task-critical edits.</span>
+          <span class="i18n" data-lang="zh">其中 140 对样本额外带 <code>irrelevant_image</code> 对照臂，用于检验答案在非任务关键编辑下的稳定性。</span>
+        </p>
+      </section>
+
+      <!-- ============================ LEADERBOARD ============================ -->
+      <section id="leaderboard-section" data-reveal>
+        <div class="section-head">
+          <span class="section-meta">05 / <span class="i18n" data-lang="en">Leaderboard</span><span class="i18n" data-lang="zh">排行榜</span></span>
+          <h2><span class="i18n" data-lang="en">24 frontier MLLMs in independent mode.</span><span class="i18n" data-lang="zh">独立模式下的 24 个前沿 MLLM。</span></h2>
+        </div>
+        <p>
+          <span class="i18n" data-lang="en">Click any numeric column header to re-sort. Bold marks the global best in the Avg columns.</span>
+          <span class="i18n" data-lang="zh">点击数值列头可重新排序；Avg 列加粗为全局最优。</span>
+        </p>
+
+        <div class="table-wrap full-bleed">
+          <table class="data" id="leaderboard">
+            <thead>
+              <tr>
+                <th><span class="i18n" data-lang="en">Group</span><span class="i18n" data-lang="zh">类别</span></th>
+                <th><span class="i18n" data-lang="en">Model</span><span class="i18n" data-lang="zh">模型</span></th>
+                <th class="num">Year</th>
+                <th class="num" data-sort-num>Acc<sub>p</sub> ↑</th>
+                <th class="num" data-sort-num>CR ↓</th>
+                <th class="num" data-sort-num>Card.&nbsp;Acc<sub>p</sub></th>
+                <th class="num" data-sort-num>Card.&nbsp;CR</th>
+                <th class="num" data-sort-num>Attr.&nbsp;Acc<sub>p</sub></th>
+                <th class="num" data-sort-num>Attr.&nbsp;CR</th>
+                <th class="num" data-sort-num>Spat.&nbsp;Acc<sub>p</sub></th>
+                <th class="num" data-sort-num>Spat.&nbsp;CR</th>
+                <th class="num" data-sort-num>Logic&nbsp;Acc<sub>p</sub></th>
+                <th class="num" data-sort-num>Logic&nbsp;CR</th>
+              </tr>
+            </thead>
+            <tbody>
+<!-- LEADERBOARD:START -->
+          <tr><td>Closed</td><td>Gemini 3.5 Flash</td><td>2026</td><td><strong>81.2</strong></td><td>7.3</td><td>84.9</td><td>7.1</td><td>90.5</td><td>4.5</td><td>70.7</td><td>11.4</td><td>68.6</td><td>9.5</td></tr>
+          <tr><td>Closed</td><td>Qwen3.6-Plus</td><td>2026</td><td>80.2</td><td>6.8</td><td>83.6</td><td>8.3</td><td>90.5</td><td>3.4</td><td>69.3</td><td>12.8</td><td>66.1</td><td>5.3</td></tr>
+          <tr><td>Closed</td><td>GPT-5.5</td><td>2026</td><td>78.6</td><td>5.8</td><td>85.6</td><td>3.7</td><td>86.4</td><td>5.7</td><td>68.0</td><td>7.8</td><td>65.3</td><td>6.6</td></tr>
+          <tr><td>Closed</td><td>Gemini 3.1 Pro</td><td>2026</td><td>77.1</td><td>10.1</td><td>79.5</td><td>8.6</td><td>88.3</td><td>5.9</td><td>68.7</td><td>16.0</td><td>59.3</td><td>15.5</td></tr>
+          <tr><td>Closed</td><td>Qwen3.5-Flash</td><td>2026</td><td>72.1</td><td>7.8</td><td>74.0</td><td>6.4</td><td>87.2</td><td>3.8</td><td>52.7</td><td>17.3</td><td>59.3</td><td>7.9</td></tr>
+          <tr><td>Closed</td><td>Seed 2.0 Mini</td><td>2026</td><td>68.6</td><td>11.8</td><td>61.7</td><td>10.1</td><td>86.2</td><td>8.8</td><td>67.4</td><td>18.4</td><td>40.2</td><td>14.5</td></tr>
+          <tr><td>Closed</td><td>GLM-5V-Turbo</td><td>2026</td><td>59.7</td><td>10.2</td><td>41.1</td><td>13.3</td><td>78.7</td><td>5.5</td><td>53.6</td><td>17.3</td><td>46.6</td><td>11.1</td></tr>
+          <tr><td>Closed</td><td>Claude Opus 4.7</td><td>2026</td><td>57.2</td><td>13.1</td><td>43.2</td><td>16.0</td><td>74.0</td><td>8.3</td><td>48.7</td><td>20.3</td><td>46.6</td><td>12.2</td></tr>
+          <tr><td>Closed</td><td>Grok 4.3</td><td>2026</td><td>52.5</td><td>18.4</td><td>33.6</td><td>22.9</td><td>73.6</td><td>12.0</td><td>40.0</td><td>28.8</td><td>43.2</td><td>17.2</td></tr>
+          <tr><td>Closed</td><td>GPT-5-mini</td><td>2025</td><td>45.3</td><td>27.6</td><td>28.1</td><td>27.3</td><td>53.8</td><td>29.0</td><td>47.3</td><td>30.4</td><td>44.1</td><td>20.2</td></tr>
+          <tr><td>Closed</td><td>Claude Opus 4.6</td><td>2026</td><td>28.4</td><td>23.2</td><td>19.2</td><td>25.0</td><td>38.1</td><td>17.3</td><td>30.7</td><td>29.1</td><td>14.4</td><td>32.7</td></tr>
+          <tr><td>Closed</td><td>GPT-4o</td><td>2024</td><td>23.3</td><td>50.6</td><td>13.0</td><td>57.1</td><td>20.9</td><td>61.7</td><td>40.0</td><td>34.7</td><td>20.3</td><td>34.9</td></tr>
+          <tr><td>Open</td><td>MiMo-v2.5-310B</td><td>2026</td><td>51.0</td><td>9.6</td><td>47.3</td><td>8.8</td><td>59.0</td><td>7.6</td><td>46.2</td><td>15.7</td><td>43.2</td><td>8.6</td></tr>
+          <tr><td>Open</td><td>Kimi K2.6-1T</td><td>2026</td><td>41.6</td><td><strong>2.9</strong></td><td>48.6</td><td>2.9</td><td>39.9</td><td>1.7</td><td>41.6</td><td>2.4</td><td>35.6</td><td>5.6</td></tr>
+          <tr><td>Open</td><td>GLM-4.6V-106B</td><td>2025</td><td>38.7</td><td>26.6</td><td>37.0</td><td>14.0</td><td>42.9</td><td>32.5</td><td>44.7</td><td>32.3</td><td>23.7</td><td>14.3</td></tr>
+          <tr><td>Open</td><td>Qwen3-VL-235B</td><td>2025</td><td>26.5</td><td>47.7</td><td>26.7</td><td>47.2</td><td>19.0</td><td>60.1</td><td>38.7</td><td>39.7</td><td>28.0</td><td>24.2</td></tr>
+          <tr><td>Open</td><td>Qwen3-VL-32B</td><td>2025</td><td>25.0</td><td>51.4</td><td>27.4</td><td>50.5</td><td>16.8</td><td>67.4</td><td>42.0</td><td>36.6</td><td>19.5</td><td>37.5</td></tr>
+          <tr><td>Open</td><td>Qwen3-VL-8B</td><td>2025</td><td>17.6</td><td>52.7</td><td>15.8</td><td>55.1</td><td>11.7</td><td>61.5</td><td>28.0</td><td>43.2</td><td>20.3</td><td>48.5</td></tr>
+          <tr><td>Open</td><td>Qwen2.5-VL-7B</td><td>2025</td><td>9.2</td><td>53.0</td><td>3.4</td><td>45.2</td><td>12.8</td><td>61.2</td><td>6.7</td><td>53.6</td><td>11.0</td><td>35.2</td></tr>
+          <tr><td>Tool-aug.</td><td>CoF-7B</td><td>2025</td><td>10.6</td><td>47.4</td><td>7.5</td><td>33.3</td><td>13.2</td><td>54.7</td><td>14.7</td><td>42.0</td><td>3.4</td><td>49.0</td></tr>
+          <tr><td>Tool-aug.</td><td>DeepEyesV2-7B</td><td>2026</td><td>9.2</td><td>42.6</td><td>7.5</td><td>34.4</td><td>8.4</td><td>50.7</td><td>11.3</td><td>41.5</td><td>10.2</td><td>32.8</td></tr>
+          <tr><td>Tool-aug.</td><td>PixelReasoner-8B</td><td>2025</td><td>7.9</td><td>51.6</td><td>4.8</td><td>38.1</td><td>12.1</td><td>55.1</td><td>5.3</td><td>56.2</td><td>5.1</td><td>50.0</td></tr>
+          <tr><td>Tool-aug.</td><td>Mini-o3-7B</td><td>2025</td><td>7.3</td><td>44.7</td><td>4.8</td><td>38.3</td><td>10.6</td><td>49.6</td><td>5.3</td><td>42.1</td><td>5.1</td><td>42.0</td></tr>
+          <tr><td>Tool-aug.</td><td>DeepEyes-7B</td><td>2025</td><td>7.1</td><td>53.0</td><td>4.1</td><td>42.1</td><td>8.1</td><td>64.6</td><td>8.0</td><td>45.6</td><td>7.6</td><td>44.3</td></tr>
+<!-- LEADERBOARD:END -->
+            </tbody>
+          </table>
+        </div>
+
+        <p style="margin-top:14px;color:var(--fg-mute);font-size:13px;">
+          <span class="i18n" data-lang="en">Source of truth: <code>data/leaderboard.json</code> · regenerate with <code>python tools/sync_leaderboard.py --write</code>.</span>
+          <span class="i18n" data-lang="zh">数据来源：<code>data/leaderboard.json</code> · 用 <code>python tools/sync_leaderboard.py --write</code> 重新生成。</span>
+        </p>
+      </section>
+
+      <!-- ============================ FINDINGS ============================ -->
+      <section id="findings" data-reveal>
+        <div class="section-head">
+          <span class="section-meta">06 / <span class="i18n" data-lang="en">Findings</span><span class="i18n" data-lang="zh">主要发现</span></span>
+          <h2><span class="i18n" data-lang="en">Three patterns across the 24 models.</span><span class="i18n" data-lang="zh">24 个模型之间的三条规律。</span></h2>
+        </div>
+
+        <ol class="findings">
+          <li>
+            <strong><span class="i18n" data-lang="en">Acc<sub>p</sub> does not determine CR.</span><span class="i18n" data-lang="zh">Acc<sub>p</sub> 决定不了 CR。</span></strong>
+            <span class="i18n" data-lang="en">Even frontier systems collapse on 5–13% of solvable pairs. High pair accuracy does not imply low collapse.</span>
+            <span class="i18n" data-lang="zh">即便是前沿系统，在它们能解的样本中仍有 5–13% 出现坍塌。配对准确率高并不蕴含坍塌率低。</span>
+          </li>
+          <li>
+            <strong><span class="i18n" data-lang="en">Tool-augmented models in this evaluation remain vulnerable.</span><span class="i18n" data-lang="zh">本评测中的工具增强模型同样脆弱。</span></strong>
+            <span class="i18n" data-lang="en">Despite explicit pixel-level operations, the five we tested (DeepEyes, DeepEyesV2, PixelReasoner, Mini-o3, CoF) sit at Acc<sub>p</sub> ≈ 7–11 and CR ≈ 42–53. We do <em>not</em> claim pixel-tool methods cannot help in general — only that none of the five closed the gap on VisualFLIP.</span>
+            <span class="i18n" data-lang="zh">尽管有显式的像素级操作，我们测试的 5 个模型（DeepEyes、DeepEyesV2、PixelReasoner、Mini-o3、CoF）均处于 Acc<sub>p</sub>≈7–11、CR≈42–53。这并<em>不</em>意味着像素工具方法在一般情境下无效——只是这 5 个在 VisualFLIP 上都未能缩小差距。</span>
+          </li>
+          <li>
+            <strong><span class="i18n" data-lang="en">Sequential exposure amplifies prior-answer persistence.</span><span class="i18n" data-lang="zh">序列暴露放大了对先前答案的固守。</span></strong>
+            <span class="i18n" data-lang="en">When the edited image follows an earlier answer in a sequential setting, several capable systems show lower Acc<sub>p</sub> and higher collapse than under independent evaluation (see paper Table 2).</span>
+            <span class="i18n" data-lang="zh">在序列设置下，当编辑图紧跟在先前答案之后出现，多个能力较强的模型相比独立评测呈现更低 Acc<sub>p</sub>、更高坍塌（见论文 Table 2）。</span>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ============================ USAGE ============================ -->
+      <section id="usage" data-reveal>
+        <div class="section-head">
+          <span class="section-meta">07 / <span class="i18n" data-lang="en">Use it</span><span class="i18n" data-lang="zh">使用</span></span>
+          <h2><span class="i18n" data-lang="en">Three commands.</span><span class="i18n" data-lang="zh">三条命令。</span></h2>
+        </div>
+
+        <div class="code-block-wrap">
+          <button class="copy-btn" data-copy-target="quickstart-code" type="button">Copy</button>
+          <pre><code id="quickstart-code">pip install -U huggingface_hub requests
+git clone https://github.com/didizhu-judy/VisualFLIP &amp;&amp; cd VisualFLIP
+
+# 1) Pull the dataset (~530 MB)
+python scripts/download_data.py --out ./visualflip_data
+
+# 2) Run an OpenRouter eval (auto-bumps max-tokens for the two long templates)
+export VISUALFLIP_DATA=./visualflip_data
+export OPENROUTER_API_KEY=sk-or-...
+python scripts/evaluate.py --model google/gemini-2.5-flash \
+    --out results/gemini25flash.json
+
+# 3) Acc_p / CR / U-I-O decomposition + schema validation
+python scripts/aggregate.py results/gemini25flash.json --expected-n 687</code></pre>
+        </div>
+
+        <p style="color:var(--fg-mute);font-size:14px;">
+          <span class="i18n" data-lang="en">Weak models can skip the two long-context templates with <code>--exclude-templates color_connectivity,maze_path</code>. To submit a model to the leaderboard, open a PR — see <a href="https://github.com/didizhu-judy/VisualFLIP/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.</span>
+          <span class="i18n" data-lang="zh">弱模型可加 <code>--exclude-templates color_connectivity,maze_path</code> 跳过两个长上下文模板。提交新模型到排行榜：发 PR，参见 <a href="https://github.com/didizhu-judy/VisualFLIP/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>。</span>
+        </p>
+      </section>
+
+      <!-- ============================ LICENSE ============================ -->
+      <section id="license" data-reveal>
+        <div class="section-head">
+          <span class="section-meta">08 / <span class="i18n" data-lang="en">License</span><span class="i18n" data-lang="zh">许可证</span></span>
+          <h2><span class="i18n" data-lang="en">Mixed license, per-row by <code>source</code>.</span><span class="i18n" data-lang="zh">混合许可证，按行的 <code>source</code> 字段判定。</span></h2>
+        </div>
+        <ul>
+          <li><strong><span class="i18n" data-lang="en">Code</span><span class="i18n" data-lang="zh">代码</span></strong> — MIT (<a href="https://github.com/didizhu-judy/VisualFLIP/blob/main/LICENSE">LICENSE</a>).</li>
+          <li><strong><span class="i18n" data-lang="en">Synthetic subset (515 pairs)</span><span class="i18n" data-lang="zh">合成子集（515 对）</span></strong> — CC BY 4.0 (<a href="https://github.com/didizhu-judy/VisualFLIP/blob/main/DATA_LICENSE">DATA_LICENSE</a>).</li>
+          <li><strong><span class="i18n" data-lang="en">Real-image subset (172 pairs)</span><span class="i18n" data-lang="zh">真实图像子集（172 对）</span></strong> — MIT, inherited from <a href="https://github.com/mathllm/MATH-V">MathVision</a> (<a href="https://github.com/didizhu-judy/VisualFLIP/blob/main/THIRD_PARTY_NOTICES.md">THIRD_PARTY_NOTICES</a>).</li>
+        </ul>
+      </section>
+
+      <!-- ============================ CITATION ============================ -->
+      <section id="citation" data-reveal>
+        <div class="section-head">
+          <span class="section-meta">09 / <span class="i18n" data-lang="en">Citation</span><span class="i18n" data-lang="zh">引用</span></span>
+          <h2>BibTeX</h2>
+        </div>
+        <div class="code-block-wrap">
+          <button class="copy-btn" data-copy-target="bibtex-code" type="button">Copy</button>
+          <pre><code id="bibtex-code">@article{zhu2026visualflip,
+  title   = {VisualFLIP: Do Predictions Depend on Task-Critical
+             Visual Evidence in Multimodal Reasoning?},
+  author  = {Zhu, Didi and Chen, Changrui and Zafeiriou, Stefanos and Deng, Jiankang},
+  year    = {2026},
+  journal = {arXiv preprint},
+  note    = {Code and data: https://github.com/didizhu-judy/VisualFLIP}
+}</code></pre>
+        </div>
+        <p style="color:var(--fg-mute);font-size:14px;">
+          <span class="i18n" data-lang="en">If you use the 172 real-image pairs (<code>source == "real_mathvision"</code>), please also cite the <a href="https://github.com/mathllm/MATH-V">MathVision benchmark</a> (Wang et al., 2024).</span>
+          <span class="i18n" data-lang="zh">如果使用了 172 对真实图像样本（<code>source == "real_mathvision"</code>），请同时引用 <a href="https://github.com/mathllm/MATH-V">MathVision 基准</a>（Wang et al., 2024）。</span>
+        </p>
+      </section>
+
+    </article>
+
+    <footer class="page-foot">
+      <span class="i18n" data-lang="en">© 2026 Didi Zhu, Changrui Chen, Stefanos Zafeiriou, Jiankang Deng — Imperial College London. Contact: <a href="mailto:dzhu@ic.ac.uk">dzhu@ic.ac.uk</a>.</span>
+      <span class="i18n" data-lang="zh">© 2026 Didi Zhu, Changrui Chen, Stefanos Zafeiriou, Jiankang Deng — Imperial College London。联系：<a href="mailto:dzhu@ic.ac.uk">dzhu@ic.ac.uk</a>。</span>
+    </footer>
+
+    <script src="static/js/main.js?v=4"></script>
+  </body>
+</html>

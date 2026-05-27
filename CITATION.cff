@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+title: "VisualFLIP: Do Predictions Depend on Task-Critical Visual Evidence in Multimodal Reasoning?"
+message: "If you use VisualFLIP, please cite this work."
+type: dataset
+authors:
+  - family-names: Zhu
+    given-names: Didi
+    email: dzhu@ic.ac.uk
+    affiliation: Imperial College London
+  - family-names: Chen
+    given-names: Changrui
+    affiliation: Imperial College London
+  - family-names: Zafeiriou
+    given-names: Stefanos
+    affiliation: Imperial College London
+  - family-names: Deng
+    given-names: Jiankang
+    affiliation: Imperial College London
+repository-code: "https://github.com/didizhu-judy/VisualFLIP"
+url: "https://didizhu-judy.github.io/VisualFLIP/"
+# Mixed-license benchmark — see DATA_LICENSE, LICENSE, and THIRD_PARTY_NOTICES.md.
+# (CITATION.cff allows a single 'license' string; we use the SPDX expression below
+# and a free-text statement so tools that key off this field do not over-claim.)
+license: "MIT AND CC-BY-4.0"
+license-url: "https://github.com/didizhu-judy/VisualFLIP/blob/main/DATA_LICENSE"
+keywords:
+  - multimodal reasoning
+  - MLLM evaluation
+  - benchmark
+  - visual grounding
+  - counterfactual evaluation
+  - paired benchmark
+date-released: "2026-05-27"
+version: "1.0.0"

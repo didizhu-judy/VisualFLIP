@@ -1,0 +1,48 @@
+VisualFLIP Dataset — License
+============================
+
+VisualFLIP ships a **mixed-license** dataset. Read both sections.
+
+--------------------------------------------------------------------
+1. Synthetic subset (515 pairs, `source == "synthetic"`) — CC BY 4.0
+--------------------------------------------------------------------
+
+The 515 synthetic image pairs and their accompanying manifest entries are
+released under the Creative Commons Attribution 4.0 International License
+(CC BY 4.0):
+
+    https://creativecommons.org/licenses/by/4.0/
+
+You are free to share, adapt, and use this material for any purpose, including
+commercial, provided you give appropriate credit (cite the VisualFLIP paper —
+see CITATION.cff or README.md) and indicate if changes were made.
+
+------------------------------------------------------------------------
+2. Real-image subset (172 pairs, `source == "real_mathvision"`) — MIT
+------------------------------------------------------------------------
+
+The 172 real-image pairs are derived from the MathVision benchmark
+(Wang et al., 2024), which is itself released under the MIT License. Their use
+and redistribution here are governed by that upstream license — see
+THIRD_PARTY_NOTICES.md for the verbatim upstream license text, the
+attribution requirements, and provenance notes.
+
+If your downstream use is incompatible with MIT (or with MathVision's upstream
+sourcing notes), filter to `source == "synthetic"`:
+
+    import json
+    with open("manifest.jsonl") as f:
+        synthetic_only = [json.loads(l) for l in f
+                          if json.loads(l)["source"] == "synthetic"]   # 515 pairs
+
+------------------------------------------------------------------------
+HF dataset-page metadata
+------------------------------------------------------------------------
+
+The Hugging Face dataset card (`README.md` on huggingface.co/datasets/...)
+advertises `license: other / license_name: visualflip-mixed` because the
+contents are not all under a single Hub-standard license. The
+`source` field per row selects which of the two licenses above applies.
+
+For the canonical text of either license, see this file (synthetic) and
+THIRD_PARTY_NOTICES.md (real-image subset).
