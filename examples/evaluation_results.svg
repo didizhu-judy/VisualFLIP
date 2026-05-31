@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" role="img" aria-labelledby="title desc">
+<title id="title">VisualFLIP evaluation results</title>
+<desc id="desc">Representative independent and sequential pair accuracy on VisualFLIP, with pair accuracy and collapse rate highlights.</desc>
+<style>
+  .bg{fill:#fbfbf8}.panel{fill:#fff;stroke:#d8ded8;stroke-width:1.5}.hair{stroke:#e6ebe6;stroke-width:1}.axis{stroke:#aeb8ae;stroke-width:1.3}.title{font:700 30px Inter,Arial,sans-serif;fill:#171816}.subtitle{font:500 17px Inter,Arial,sans-serif;fill:#606a63}.mono{font:700 14px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#687169}.legend{font:700 15px Inter,Arial,sans-serif;fill:#424a44}.tick{font:500 15px Inter,Arial,sans-serif;fill:#687169}.label{font:700 16px Inter,Arial,sans-serif;fill:#4f5651}.value{font:800 16px Inter,Arial,sans-serif;fill:#555e57}.model{font:600 15px Inter,Arial,sans-serif;fill:#58625b}.calloutK{font:700 12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#7a837c}.calloutV{font:800 20px Inter,Arial,sans-serif;fill:#171816}.calloutT{font:500 14px Inter,Arial,sans-serif;fill:#687169}.orange{fill:#ef553a}.teal{fill:#08a6a6}.green{fill:#7aa437}
+</style>
+<rect class="bg" width="1600" height="760" rx="28"/>
+<text x="80" y="48" class="mono">VISUALFLIP / EVALUATION RESULTS</text>
+<circle cx="82" cy="78" r="7" class="teal"/><circle cx="105" cy="78" r="7" class="orange"/><circle cx="128" cy="78" r="7" class="green"/>
+<text x="80" y="128" class="title">Do predictions move with task-critical visual evidence?</text>
+<text x="80" y="160" class="subtitle">Representative MLLMs under independent vs sequential evaluation. Prior-answer exposure lowers Acc<tspan baseline-shift="sub" font-size="12">p</tspan> for several capable systems.</text>
+<rect x="70" y="190" width="1460" height="470" rx="20" class="panel"/>
+<text x="112" y="235" class="title" style="font-size:24px">Pair Accuracy, Acc<tspan baseline-shift="sub" font-size="14">p</tspan> (%)</text>
+<rect x="1190" y="218" width="22" height="14" rx="4" fill="#f1dcc1"/><text x="1222" y="231" class="legend">Independent</text>
+<rect x="1340" y="218" width="22" height="14" rx="4" fill="#d3b89f"/><text x="1372" y="231" class="legend">Sequential</text>
+<line x1="135" y1="535" x2="1455" y2="535" class="hair"/>
+<text x="117" y="540" class="tick" text-anchor="end">0</text>
+<line x1="135" y1="485" x2="1455" y2="485" class="hair"/>
+<text x="117" y="490" class="tick" text-anchor="end">20</text>
+<line x1="135" y1="435" x2="1455" y2="435" class="hair"/>
+<text x="117" y="440" class="tick" text-anchor="end">40</text>
+<line x1="135" y1="385" x2="1455" y2="385" class="hair"/>
+<text x="117" y="390" class="tick" text-anchor="end">60</text>
+<line x1="135" y1="335" x2="1455" y2="335" class="hair"/>
+<text x="117" y="340" class="tick" text-anchor="end">80</text>
+<line x1="135" y1="285" x2="1455" y2="285" class="hair"/>
+<text x="117" y="290" class="tick" text-anchor="end">100</text>
+<line x1="135" y1="535" x2="1455" y2="535" class="axis"/>
+<line x1="135" y1="285" x2="135" y2="535" class="axis"/>
+<text x="103" y="410" class="label" text-anchor="middle" transform="rotate(-90 103 410)">Pair Accuracy (%)</text>
+<rect x="176.0" y="470.0" width="38" height="65.0" rx="5" fill="#d9e4f4"/>
+<rect x="221.0" y="485.0" width="38" height="50.0" rx="5" fill="#becadc"/>
+<text x="195.0" y="462.0" class="value" text-anchor="middle">26</text>
+<text x="240.0" y="477.0" class="value" text-anchor="middle">20</text>
+<text x="217.5" y="572" class="model" text-anchor="end" transform="rotate(-24 217.5 572)">Qwen3-VL-235B</text>
+<rect x="341.0" y="422.5" width="38" height="112.5" rx="5" fill="#deeadf"/>
+<rect x="386.0" y="465.0" width="38" height="70.0" rx="5" fill="#c5d4c9"/>
+<text x="360.0" y="414.5" class="value" text-anchor="middle">45</text>
+<text x="405.0" y="457.0" class="value" text-anchor="middle">28</text>
+<text x="382.5" y="572" class="model" text-anchor="end" transform="rotate(-24 382.5 572)">GPT-5-mini</text>
+<rect x="506.0" y="405.0" width="38" height="130.0" rx="5" fill="#e8ead4"/>
+<rect x="551.0" y="467.5" width="38" height="67.5" rx="5" fill="#cbceb2"/>
+<text x="525.0" y="397.0" class="value" text-anchor="middle">52</text>
+<text x="570.0" y="459.5" class="value" text-anchor="middle">27</text>
+<text x="547.5" y="572" class="model" text-anchor="end" transform="rotate(-24 547.5 572)">Grok 4.3</text>
+<rect x="671.0" y="392.5" width="38" height="142.5" rx="5" fill="#f4e1b7"/>
+<rect x="716.0" y="405.0" width="38" height="130.0" rx="5" fill="#dbc48b"/>
+<text x="690.0" y="384.5" class="value" text-anchor="middle">57</text>
+<text x="735.0" y="397.0" class="value" text-anchor="middle">52</text>
+<text x="712.5" y="572" class="model" text-anchor="end" transform="rotate(-24 712.5 572)">Claude Opus 4.7</text>
+<rect x="836.0" y="385.0" width="38" height="150.0" rx="5" fill="#f7dfad"/>
+<rect x="881.0" y="482.5" width="38" height="52.5" rx="5" fill="#e2bf79"/>
+<text x="855.0" y="377.0" class="value" text-anchor="middle">60</text>
+<text x="900.0" y="474.5" class="value" text-anchor="middle">21</text>
+<text x="877.5" y="572" class="model" text-anchor="end" transform="rotate(-24 877.5 572)">GLM-5V-Turbo</text>
+<rect x="1001.0" y="342.5" width="38" height="192.5" rx="5" fill="#f3d0ae"/>
+<rect x="1046.0" y="342.5" width="38" height="192.5" rx="5" fill="#dbb184"/>
+<text x="1020.0" y="334.5" class="value" text-anchor="middle">77</text>
+<text x="1065.0" y="334.5" class="value" text-anchor="middle">77</text>
+<text x="1042.5" y="572" class="model" text-anchor="end" transform="rotate(-24 1042.5 572)">Gemini 3.1 Pro</text>
+<rect x="1166.0" y="335.0" width="38" height="200.0" rx="5" fill="#f0cfc2"/>
+<rect x="1211.0" y="412.5" width="38" height="122.5" rx="5" fill="#d5ab9f"/>
+<text x="1185.0" y="327.0" class="value" text-anchor="middle">80</text>
+<text x="1230.0" y="404.5" class="value" text-anchor="middle">49</text>
+<text x="1207.5" y="572" class="model" text-anchor="end" transform="rotate(-24 1207.5 572)">Qwen3.6-Plus</text>
+<rect x="1331.0" y="332.5" width="38" height="202.5" rx="5" fill="#e7cad3"/>
+<rect x="1376.0" y="362.5" width="38" height="172.5" rx="5" fill="#cbaabb"/>
+<text x="1350.0" y="324.5" class="value" text-anchor="middle">81</text>
+<text x="1395.0" y="354.5" class="value" text-anchor="middle">69</text>
+<text x="1372.5" y="572" class="model" text-anchor="end" transform="rotate(-24 1372.5 572)">Gemini 3.5 Flash</text>
+<rect x="100" y="682" width="400" height="58" rx="13" fill="#ffffff" stroke="#dfe5df"/>
+<text x="120" y="702" class="calloutK">BEST ACCP</text>
+<text x="120" y="728" class="calloutV">Gemini 3.5 Flash · 81.2</text>
+<rect x="565" y="682" width="400" height="58" rx="13" fill="#ffffff" stroke="#dfe5df"/>
+<text x="585" y="702" class="calloutK">LOWEST CR</text>
+<text x="585" y="728" class="calloutV">Kimi K2.6-1T · 2.9</text>
+<rect x="1030" y="682" width="400" height="58" rx="13" fill="#ffffff" stroke="#dfe5df"/>
+<text x="1050" y="702" class="calloutK">BENCHMARK</text>
+<text x="1050" y="728" class="calloutV">687 paired flips · 24 MLLMs</text>
+</svg>

@@ -10,7 +10,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Data: CC BY 4.0](https://img.shields.io/badge/Data-CC%20BY%204.0-blue.svg)](DATA_LICENSE)
 
-<img src="examples/teaser.png" width="1000"/>
+<img src="examples/teaser.png" width="1200"/>
 
 </div>
 
@@ -152,10 +152,18 @@ global tracing). Weak models can skip them with `--exclude-templates color_conne
 
 ---
 
-## Leaderboard (independent mode, top of paper Table 1)
+## Evaluation Results
 
-Sorted by overall **Acc<sub>p</sub>** ↑; **CR ↓** breaks ties. Full 24-model table on the
+<p align="center">
+  <img src="examples/evaluation_results.svg" width="100%"/>
+</p>
+
+The SVG above follows the paper-style result figure: the left-to-right pairs compare independent
+and sequential evaluation on representative MLLMs. Full 24-model results are on the
 [project page](https://didizhu-judy.github.io/VisualFLIP/).
+
+<details>
+<summary><b>Top-10 independent-mode numeric table</b></summary>
 
 <!-- LEADERBOARD:START -->
 | # | Model | Year | Acc<sub>p</sub> ↑ | CR ↓ |
@@ -176,16 +184,7 @@ Sorted by overall **Acc<sub>p</sub>** ↑; **CR ↓** breaks ties. Full 24-model
 > *To regenerate this top-10 table from `data/leaderboard.json` after adding new
 > results, run `python tools/sync_leaderboard.py --write`.*
 
-**Headline observations**
-
-1. **Acc<sub>p</sub> does not determine CR.** Capable models can still fail to update after
-   task-critical visual changes; even the frontier systems collapse on ~5–13 % of solvable pairs.
-2. **Tool-augmented models in our evaluation remain vulnerable.** Despite explicit pixel-level
-   operations, DeepEyes, PixelReasoner, Mini-o3, CoF, and DeepEyesV2 sit at Acc<sub>p</sub> ≈ 7–11
-   and CR ≈ 42–53 on VisualFLIP. We do not claim that pixel-tool methods *cannot* help in general
-   — only that none of the five we tested closed the gap on this benchmark.
-3. **Sequential exposure (showing the original before the edited image) lowers Acc<sub>p</sub> and
-   amplifies prior-answer persistence on several capable systems.**
+</details>
 
 ---
 
@@ -233,6 +232,7 @@ VisualFLIP/
 │   ├── evaluate.py             OpenRouter eval driver, independent mode
 │   └── aggregate.py            Acc_p + CR + U/I/O decomposition
 ├── examples/
+│   ├── evaluation_results.svg
 │   ├── teaser.png
 │   └── motivating_example.png  same example as paper Figure 1
 └── docs/                       GitHub Pages source — https://didizhu-judy.github.io/VisualFLIP/

@@ -234,11 +234,13 @@ h1.title {
 }
 
 .title-sub {
-  margin-top: 10px;
+  max-width: 940px;
+  margin: 12px auto 0;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
-  font-size: 44px;
+  font-size: 31px;
   font-weight: 700;
-  white-space: nowrap;
+  line-height: 1.18;
+  text-wrap: balance;
 }
 
 .byline {
@@ -515,55 +517,6 @@ h1.title {
   text-align: center;
 }
 
-/* Stats */
-.stat-strip {
-  display: grid;
-  grid-template-columns: 1fr 1px 1fr 1px 1fr;
-  align-items: center;
-  max-width: var(--max-content);
-  margin: 34px auto 0;
-  border: 1px solid var(--rule-strong);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--canvas) 86%, var(--green) 5%);
-  overflow: hidden;
-}
-
-.stat-strip > div:not(.sep) {
-  min-height: 126px;
-  padding: 24px 20px;
-  text-align: center;
-}
-
-.stat-strip .sep {
-  width: 1px;
-  height: 82px;
-  background: var(--rule-strong);
-}
-
-.stat-num {
-  margin: 0 0 8px;
-  color: var(--fg);
-  font-family: "Source Serif 4", Georgia, serif;
-  font-size: 48px;
-  font-weight: 600;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-
-.stat-num em {
-  color: var(--accent);
-  font-size: 26px;
-  font-style: normal;
-  vertical-align: super;
-}
-
-.stat-lab {
-  color: var(--fg-mute);
-  font-size: 12px;
-  font-weight: 750;
-  text-transform: uppercase;
-}
-
 /* Content sections */
 section {
   margin-top: 86px;
@@ -613,6 +566,10 @@ p {
 
 p:last-child {
   margin-bottom: 0;
+}
+
+section > p {
+  max-width: 850px;
 }
 
 strong {
@@ -669,6 +626,83 @@ figcaption {
   line-height: 1.5;
 }
 
+/* Paper structure */
+.paper-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 24px 0 28px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--canvas-soft) 68%, var(--canvas)), var(--canvas));
+  overflow: hidden;
+}
+
+.paper-summary > div {
+  min-height: 92px;
+  padding: 16px 17px;
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.paper-summary > div:last-child {
+  border-right: 0;
+}
+
+.paper-summary > div > span,
+.metric-name {
+  color: var(--fg-mute);
+  font-family: "JetBrains Mono", "SF Mono", monospace;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.paper-summary > div > strong {
+  color: var(--fg);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 22px 0 28px;
+}
+
+.metric-card {
+  min-height: 220px;
+  padding: 18px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 8px;
+  background: var(--canvas);
+  box-shadow: 0 10px 28px rgba(23, 24, 22, 0.06);
+}
+
+.metric-card strong {
+  display: block;
+  min-height: 58px;
+  margin: 20px 0 16px;
+  color: var(--fg);
+  font-family: "JetBrains Mono", "SF Mono", monospace;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.metric-card p {
+  margin: 0;
+  color: var(--fg-soft);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
 /* Code */
 code {
   padding: 2px 5px;
@@ -719,51 +753,6 @@ pre code {
 
 .copy-btn:hover {
   background: rgba(245, 247, 243, 0.18);
-}
-
-/* Findings */
-ol.findings {
-  list-style: none;
-  margin: 18px 0 0;
-  padding: 0;
-  counter-reset: finding;
-}
-
-ol.findings > li {
-  position: relative;
-  min-height: 110px;
-  margin: 0;
-  padding: 22px 0 22px 76px;
-  border-top: 1px solid var(--rule);
-  counter-increment: finding;
-}
-
-ol.findings > li:last-child {
-  border-bottom: 1px solid var(--rule);
-}
-
-ol.findings > li::before {
-  content: counter(finding, decimal-leading-zero);
-  position: absolute;
-  left: 0;
-  top: 22px;
-  width: 52px;
-  height: 52px;
-  border: 1px solid var(--rule-strong);
-  border-radius: 8px;
-  background: var(--canvas);
-  color: var(--accent-deep);
-  display: grid;
-  place-items: center;
-  font-family: "JetBrains Mono", "SF Mono", monospace;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-ol.findings > li > strong {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 16.5px;
 }
 
 /* Tables */
@@ -928,7 +917,8 @@ body.lang-zh h2 {
   }
 
   .title-sub {
-    font-size: 34px;
+    max-width: 760px;
+    font-size: 27px;
   }
 
   .hero-anim {
@@ -952,6 +942,26 @@ body.lang-zh h2 {
 
   .collapse-pill {
     grid-column: 1 / -1;
+  }
+
+  .paper-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .paper-summary > div:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .paper-summary > div:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-card {
+    min-height: 0;
   }
 }
 
@@ -1007,10 +1017,9 @@ body.lang-zh h2 {
 
   .title-sub {
     margin-top: 8px;
-    font-size: 25px;
-    line-height: 1.08;
-    white-space: normal;
-    max-width: 330px;
+    max-width: 360px;
+    font-size: 20px;
+    line-height: 1.2;
     margin-left: auto;
     margin-right: auto;
   }
@@ -1063,22 +1072,19 @@ body.lang-zh h2 {
     font-size: 44px;
   }
 
-  .stat-strip {
+  .paper-summary {
     grid-template-columns: 1fr;
   }
 
-  .stat-strip > div:not(.sep) {
-    min-height: 96px;
-    padding: 20px 16px;
+  .paper-summary > div,
+  .paper-summary > div:nth-child(2n) {
+    min-height: 82px;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .stat-strip .sep {
-    width: auto;
-    height: 1px;
-  }
-
-  .stat-num {
-    font-size: 40px;
+  .paper-summary > div:last-child {
+    border-bottom: 0;
   }
 
   section {
@@ -1087,16 +1093,6 @@ body.lang-zh h2 {
 
   h2 {
     font-size: 28px;
-  }
-
-  ol.findings > li {
-    min-height: 0;
-    padding-left: 0;
-    padding-top: 88px;
-  }
-
-  ol.findings > li::before {
-    top: 22px;
   }
 
   .table-wrap.full-bleed {
@@ -1114,8 +1110,8 @@ body.lang-zh h2 {
   }
 
   .title-sub {
-    max-width: 340px;
-    font-size: 21px;
+    max-width: 368px;
+    font-size: 16.5px;
   }
 
   .topbar-brand {
