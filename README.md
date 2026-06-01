@@ -220,32 +220,6 @@ reports the sequential two-turn diagnostic with pair accuracy and SeqCR. Full 24
 All paths are relative to the dataset root (the directory `download_data.py` writes into). Answers
 are letters (A–E) or integers — compare case-insensitively, strip whitespace.
 
----
-
-## Repository layout
-
-```
-VisualFLIP/
-├── README.md                   you are here
-├── LICENSE                     MIT (code)
-├── DATA_LICENSE                CC BY 4.0 (data subset; MathVision license inherited)
-├── CITATION.cff                GitHub-native citation
-├── data/
-│   └── manifest.jsonl          687 paired entries; images on Hugging Face
-├── scripts/
-│   ├── download_data.py        one-command pull from huggingface.co/datasets/didizhu-judy/VisualFLIP
-│   ├── evaluate.py             OpenRouter eval driver, independent mode
-│   └── aggregate.py            Acc_p + CR + U/I/O decomposition
-├── examples/
-│   ├── table1_main_results.svg
-│   ├── table2_sequential_results.svg
-│   ├── teaser.png
-│   └── motivating_example.png  same example as paper Figure 1
-└── docs/                       GitHub Pages source — https://didizhu-judy.github.io/VisualFLIP/
-```
-
----
-
 ## Citation
 
 ```bibtex
