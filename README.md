@@ -155,11 +155,16 @@ global tracing). Weak models can skip them with `--exclude-templates color_conne
 ## Evaluation Results
 
 <p align="center">
-  <img src="examples/evaluation_results.svg" width="100%"/>
+  <img src="examples/table1_main_results.svg" width="100%"/>
 </p>
 
-The SVG above follows the paper-style result figure: the left-to-right pairs compare independent
-and sequential evaluation on representative MLLMs. Full 24-model results are on the
+<p align="center">
+  <img src="examples/table2_sequential_results.svg" width="100%"/>
+</p>
+
+The SVG tables above reproduce the paper's main Table 1 and Table 2 in README-friendly form.
+Table 1 reports independent pair accuracy and Collapse Rate across perturbation categories; Table 2
+reports the sequential two-turn diagnostic with pair accuracy and SeqCR. Full 24-model results are on the
 [project page](https://didizhu-judy.github.io/VisualFLIP/).
 
 <details>
@@ -232,7 +237,8 @@ VisualFLIP/
 │   ├── evaluate.py             OpenRouter eval driver, independent mode
 │   └── aggregate.py            Acc_p + CR + U/I/O decomposition
 ├── examples/
-│   ├── evaluation_results.svg
+│   ├── table1_main_results.svg
+│   ├── table2_sequential_results.svg
 │   ├── teaser.png
 │   └── motivating_example.png  same example as paper Figure 1
 └── docs/                       GitHub Pages source — https://didizhu-judy.github.io/VisualFLIP/
