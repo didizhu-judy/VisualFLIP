@@ -232,26 +232,6 @@ are letters (A–E) or integers — compare case-insensitively, strip whitespace
 }
 ```
 
-The 172 real-image pairs are derived from **MathVision** (Wang et al., 2024); please also cite that
-work if you use the `source == "real_mathvision"` subset:
-
-```bibtex
-@article{wang2024mathvision,
-  title  = {Measuring Multimodal Mathematical Reasoning with MATH-Vision Dataset},
-  author = {Wang, Ke and others},
-  year   = {2024}
-}
-```
-
----
-
-## License
-
-* **Code** — MIT (see [LICENSE](LICENSE)).
-* **Data** — CC BY 4.0 for the 515 synthetic pairs (see [DATA_LICENSE](DATA_LICENSE)).
-* **Real-image subset (172 pairs)** — inherits the upstream MathVision license. If your downstream
-  use has stricter licensing constraints, filter to `source == "synthetic"`.
-
 ---
 
 ## Contact
