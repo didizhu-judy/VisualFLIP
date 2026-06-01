@@ -231,10 +231,3 @@ are letters (A–E) or integers — compare case-insensitively, strip whitespace
   note    = {Code and data: https://github.com/didizhu-judy/VisualFLIP}
 }
 ```
-
----
-
-## Contact
-
-Issues and pull requests welcome on GitHub. For research collaboration:
-[`dzhu@ic.ac.uk`](mailto:dzhu@ic.ac.uk) (Imperial College London).
