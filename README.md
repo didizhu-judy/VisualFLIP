@@ -25,10 +25,6 @@ edited evidence should change; a prediction that repeats the original answer on 
 *collapses*. The benchmark is behavioural — it measures whether predictions move with the
 evidence, not the internal mechanism behind any individual answer.
 
-We report two pair-level metrics: **pair accuracy (Acc<sub>p</sub>)** — both sides right — and
-**Collapse Rate (CR)** — how often a model that solves at least one side gives the *same* non-empty
-answer to both images despite the gold flipping.
-
 ---
 
 ## At a glance
