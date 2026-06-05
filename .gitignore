@@ -27,3 +27,6 @@ visualflip_data*/
 # Local secrets
 .openrouter_key
 .env
+
+# dataset distributed via Hugging Face, not bundled here
+data/manifest.jsonl
