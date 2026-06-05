@@ -299,41 +299,10 @@
         </p>
       </section>
 
-      <!-- ============================ USAGE ============================ -->
-      <section id="usage" data-reveal>
-        <div class="section-head">
-          <span class="section-meta">04 / <span class="i18n" data-lang="en">Reproduce</span><span class="i18n" data-lang="zh">复现</span></span>
-          <h2><span class="i18n" data-lang="en">Reproduce the evaluation.</span><span class="i18n" data-lang="zh">复现实验评测。</span></h2>
-        </div>
-
-        <div class="code-block-wrap">
-          <button class="copy-btn" data-copy-target="quickstart-code" type="button">Copy</button>
-          <pre><code id="quickstart-code">pip install -U huggingface_hub requests
-git clone https://github.com/didizhu-judy/VisualFLIP &amp;&amp; cd VisualFLIP
-
-# 1) Pull the dataset (~530 MB)
-python scripts/download_data.py --out ./visualflip_data
-
-# 2) Run an OpenRouter eval (auto-bumps max-tokens for the two long templates)
-export VISUALFLIP_DATA=./visualflip_data
-export OPENROUTER_API_KEY=sk-or-...
-python scripts/evaluate.py --model google/gemini-2.5-flash \
-    --out results/gemini25flash.json
-
-# 3) Acc_p / CR / U-I-O decomposition + schema validation
-python scripts/aggregate.py results/gemini25flash.json --expected-n 687</code></pre>
-        </div>
-
-        <p style="color:var(--fg-mute);font-size:14px;">
-          <span class="i18n" data-lang="en">Weak models can skip the two long-context templates with <code>--exclude-templates color_connectivity,maze_path</code>.</span>
-          <span class="i18n" data-lang="zh">弱模型可加 <code>--exclude-templates color_connectivity,maze_path</code> 跳过两个长上下文模板。</span>
-        </p>
-      </section>
-
       <!-- ============================ CITATION ============================ -->
       <section id="citation" data-reveal>
         <div class="section-head">
-          <span class="section-meta">05 / <span class="i18n" data-lang="en">Citation</span><span class="i18n" data-lang="zh">引用</span></span>
+          <span class="section-meta">04 / <span class="i18n" data-lang="en">Citation</span><span class="i18n" data-lang="zh">引用</span></span>
           <h2>BibTeX</h2>
         </div>
         <div class="code-block-wrap">
