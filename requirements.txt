@@ -1,4 +1,0 @@
-# VisualFLIP — runtime deps for scripts/evaluate.py, scripts/aggregate.py, scripts/download_data.py
-huggingface_hub>=0.24
-requests>=2.31
-pillow>=10            # optional, only if you load images locally with PIL

@@ -5,11 +5,9 @@
 **Do Predictions Depend on Task-Critical Visual Evidence in Multimodal Reasoning?**
 
 [![Project Page](https://img.shields.io/badge/Project-Page-1f6feb?style=flat&logo=github)](https://didizhu-judy.github.io/VisualFLIP/)
-[![HF Dataset](https://img.shields.io/badge/🤗%20Dataset-VisualFLIP-yellow)](https://huggingface.co/datasets/DidiZhu/VisualFLIP)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Data: CC BY 4.0](https://img.shields.io/badge/Data-CC%20BY%204.0-blue.svg)](DATA_LICENSE)
 
-<img src="examples/teaser.png" width="1200"/>
+<img src="docs/static/images/teaser.png" width="1200"/>
 
 </div>
 
@@ -41,97 +39,11 @@ evidence, not the internal mechanism behind any individual answer.
 Each pair flips a single task-critical visual attribute (a count, a color, a spatial relation, …)
 while keeping the question text and surrounding context fixed; the "original" vs "edited" label is symmetric.
 
----
-
-<!-- TEMPORARILY HIDDEN — restore by removing this comment wrapper
-## Quick start
-
-### 1) Pull the dataset
-
-The images live on Hugging Face (≈248 MB). Mirror them locally:
-
-```bash
-pip install -U huggingface_hub
-python scripts/download_data.py --out ./visualflip_data
-```
-
-Or grab the manifest only, for inspection:
-
-```bash
-python scripts/download_data.py --manifest-only --out ./visualflip_data
-head -1 ./visualflip_data/manifest.jsonl | python -m json.tool
-```
-
-### 2) Run an evaluation (OpenRouter)
-
-```bash
-export VISUALFLIP_DATA=./visualflip_data
-export OPENROUTER_API_KEY=sk-or-...
-
-# strong model — full 687 pairs. evaluate.py auto-bumps max-tokens to 8192 for
-# color_connectivity and maze_path (the two long-context templates); other templates
-# get the default 4096.
-python scripts/evaluate.py --model google/gemini-2.5-flash \
-    --out results/gemini25flash.json
-
-# weak model — skip the two long-context templates and tighten the default budget
-python scripts/evaluate.py --model qwen/qwen2.5-vl-7b-instruct \
-    --exclude-templates color_connectivity,maze_path \
-    --max-tokens 2048 --out results/qwen25vl7b.json
-```
-
-### 3) Compute Acc<sub>p</sub> and CR
-
-```bash
-python scripts/aggregate.py results/*.json
-```
-
-Output (excerpt):
-
-```
-=== gemini25flash ===
-  OVERALL                          n= 687  Acc_p= 81.2  Acc= 88.8  CR=  7.3  ...
-  -- by category --
-  Cardinality                      n= 146  Acc_p= 84.9  CR=  7.1
-  Attribute                        n= 273  Acc_p= 90.5  CR=  4.5
-  Spatial                          n= 150  Acc_p= 70.7  CR= 11.4
-  Logic                            n= 118  Acc_p= 68.6  CR=  9.5
-```
+> **Release status.** The dataset and the maintained evaluation harness will be released upon publication of the paper. The leaderboard below and the [project page](https://didizhu-judy.github.io/VisualFLIP/) reflect the results reported in the paper.
 
 ---
-
-## Evaluation protocol (independent mode)
-
-For every pair, the **same question** is asked on `original_image` and on `edited_image` as **two
-separate completions** — *not* a multi-turn conversation. The exact prompt:
-
-```
-Think step by step. Put your reasoning in <thinking></thinking> and ONLY the final answer
-in <answer></answer>. Question: {question}
-```
-
-The extracted answer is the first match in this order: `<answer>…</answer>`, `\boxed{…}`, a trailing
-letter (A–E) or integer on the last line. **Truncation handling (default):** if `finish_reason ==
-"length"` *and* no `<answer>` tag was emitted, the prediction is treated as empty. A response that
-emitted `<answer>X</answer>` and then truncated *after* still counts as `X`. Pass
-`--strict-truncation` to invalidate **any** length-truncated response (paper-faithful
-reproduction).
-
-The two templates `color_connectivity` and `maze_path` need **≥ 8192 max-tokens** (they require long
-global tracing). Weak models can skip them with `--exclude-templates color_connectivity,maze_path`.
-
----
--->
 
 ## Evaluation Results
-
-<p align="center">
-  <img src="examples/table1_main_results.svg" width="100%"/>
-</p>
-
-<p align="center">
-  <img src="examples/table2_sequential_results.svg" width="100%"/>
-</p>
 
 **Top-10 independent-mode numeric table**
 
@@ -148,42 +60,11 @@ global tracing). Weak models can skip them with `--exclude-templates color_conne
 | 8 | Claude Opus 4.7 | 2026 | 57.2 | 13.1 |
 | 9 | Grok 4.3 | 2026 | 52.5 | 18.4 |
 | 10 | MiMo-v2.5-310B | 2026 | 51.0 | 9.6 |
-| … | (full table on project page) | | | |
 <!-- LEADERBOARD:END -->
 
-> *To regenerate this top-10 table from `data/leaderboard.json` after adding new
-> results, run `python tools/sync_leaderboard.py --write`.*
+The full 24-model leaderboard (independent and sequential evaluation, per-category breakdown) is on the [project page](https://didizhu-judy.github.io/VisualFLIP/#results).
 
 ---
-
-<!-- TEMPORARILY HIDDEN — restore by removing this comment wrapper
-## Data format
-
-`manifest.jsonl` — one record per pair:
-
-```json
-{
-  "id": "hard_dense_count_30000",
-  "source": "synthetic",                      // synthetic | real_mathvision
-  "category": "Cardinality",                  // Cardinality | Attribute | Spatial | Logic
-  "template": "hard_dense_count",             // null for real_mathvision
-  "question": "How many apples are there in the picture?",
-  "answer_original": 4,
-  "answer_edited": 3,
-  "original_image": "Cardinality/hard_dense_count_30000_original.png",
-  "edited_image":   "Cardinality/hard_dense_count_30000_edited.png",
-  "release_status": "OOD-synthetic-v2",
-
-  // present on 140 pairs only (3 templates have an irrelevant-edit control arm):
-  "irrelevant_image": "controls/hard_dense_count_30000_irrelevant.png",
-  "answer_irrelevant": 4,
-  "has_control": true
-}
-```
-
-All paths are relative to the dataset root (the directory `download_data.py` writes into). Answers
-are letters (A–E) or integers — compare case-insensitively, strip whitespace.
--->
 
 ## Citation
 
