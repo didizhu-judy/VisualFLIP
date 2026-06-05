@@ -1,56 +1,11 @@
-// VisualFLIP project page — theme + language + leaderboard sort + copy
-// + scroll-reveal.  No external deps.
+// VisualFLIP project page — leaderboard sort (if present) + copy + scroll-reveal.
+// No external deps. (Theme/language toggles removed: page is always light + English.)
 
 (function () {
-  // ------------------ Theme (light / dark) ------------------
-  var THEME_KEY = "visualflip-theme";
-  var saved = localStorage.getItem(THEME_KEY);
-  if (saved) document.documentElement.dataset.theme = saved;
-
   document.addEventListener("DOMContentLoaded", function () {
-    var themeBtn = document.getElementById("theme-toggle");
-    function paintTheme() {
-      var cur = document.documentElement.dataset.theme;
-      if (!cur) {
-        var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-        cur = prefersDark ? "dark" : "light";
-      }
-      if (themeBtn) {
-        themeBtn.textContent = cur === "dark" ? "Light" : "Dark";
-        themeBtn.setAttribute("aria-label", cur === "dark" ? "Switch to light theme" : "Switch to dark theme");
-      }
-    }
-    paintTheme();
-    if (themeBtn) {
-      themeBtn.addEventListener("click", function () {
-        var cur = document.documentElement.dataset.theme || "light";
-        var next = cur === "dark" ? "light" : "dark";
-        document.documentElement.dataset.theme = next;
-        localStorage.setItem(THEME_KEY, next);
-        paintTheme();
-      });
-    }
-
-    // ------------------ Language (EN / 中文) ------------------
-    var LANG_KEY = "visualflip-lang";
-    var langBtn = document.getElementById("lang-toggle");
-    function applyLang(lang) {
-      document.body.classList.toggle("lang-zh", lang === "zh");
-      if (langBtn) langBtn.textContent = lang === "zh" ? "EN" : "中文";
-      localStorage.setItem(LANG_KEY, lang);
-    }
-    var initialLang = localStorage.getItem(LANG_KEY) || "en";
-    applyLang(initialLang);
-    if (langBtn) {
-      langBtn.addEventListener("click", function () {
-        var cur = document.body.classList.contains("lang-zh") ? "zh" : "en";
-        applyLang(cur === "zh" ? "en" : "zh");
-      });
-    }
-
-    // ------------------ Leaderboard sort ------------------
+    // ------------------ Leaderboard sort (only if sortable headers exist) ------------------
     var table = document.getElementById("leaderboard");
-    if (table) {
+    if (table && table.tHead) {
       var tbody = table.tBodies[0];
       var headers = Array.from(table.tHead.rows[0].cells);
       headers.forEach(function (th, idx) {
@@ -92,7 +47,6 @@
 
     // ------------------ Scroll-reveal ------------------
     var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
     var reveals = document.querySelectorAll("[data-reveal]");
     if ("IntersectionObserver" in window && !reduceMotion) {
       var io = new IntersectionObserver(function (entries) {
@@ -104,10 +58,7 @@
       }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
       reveals.forEach(function (el) { io.observe(el); });
     } else {
-      // No IO or reduced motion → show everything immediately.
-      reveals.forEach(function (el) {
-        el.classList.add("is-visible");
-      });
+      reveals.forEach(function (el) { el.classList.add("is-visible"); });
     }
   });
 })();
