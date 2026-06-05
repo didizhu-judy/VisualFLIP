@@ -1153,3 +1153,13 @@ table.data tbody tr.group-row.sub td {
 table.data tbody tr.group-row:hover td { color: var(--accent-deep); }
 
 table.data td.rank { color: var(--fg-mute); font-weight: 500; font-size: 12px; }
+
+/* two-row grouped header (results tables) */
+table.data thead tr:nth-child(2) th { top: 39px; }
+table.data thead th[colspan] {
+  text-align: center;
+  border-left: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule);
+}
+table.data thead th[rowspan] { vertical-align: bottom; }
+table.data thead tr:nth-child(2) th.grp-start { border-left: 1px solid var(--rule-strong); }

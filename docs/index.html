@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="static/css/styles.css?v=10" />
+    <link rel="stylesheet" href="static/css/styles.css?v=11" />
   </head>
   <body>
 
@@ -209,19 +209,21 @@
           <table class="data" id="leaderboard">
             <thead>
               <tr>
-                <th class="num">#</th>
-                <th><span class="i18n" data-lang="en">Model</span><span class="i18n" data-lang="zh">模型</span></th>
-                <th class="num"><span class="i18n" data-lang="en">Year</span><span class="i18n" data-lang="zh">年份</span></th>
-                <th class="num">Acc<sub>p</sub> &uarr;</th>
-                <th class="num">CR &darr;</th>
-                <th class="num">Card.&nbsp;Acc<sub>p</sub></th>
-                <th class="num">Card.&nbsp;CR</th>
-                <th class="num">Attr.&nbsp;Acc<sub>p</sub></th>
-                <th class="num">Attr.&nbsp;CR</th>
-                <th class="num">Spat.&nbsp;Acc<sub>p</sub></th>
-                <th class="num">Spat.&nbsp;CR</th>
-                <th class="num">Logic&nbsp;Acc<sub>p</sub></th>
-                <th class="num">Logic&nbsp;CR</th>
+                <th class="num" rowspan="2">#</th>
+                <th rowspan="2"><span class="i18n" data-lang="en">Model</span><span class="i18n" data-lang="zh">模型</span></th>
+                <th class="num" rowspan="2"><span class="i18n" data-lang="en">Year</span><span class="i18n" data-lang="zh">年份</span></th>
+                <th colspan="2"><span class="i18n" data-lang="en">Overall</span><span class="i18n" data-lang="zh">总体</span></th>
+                <th colspan="2">Cardinality</th>
+                <th colspan="2">Attribute</th>
+                <th colspan="2">Spatial</th>
+                <th colspan="2">Logic</th>
+              </tr>
+              <tr>
+                <th class="num grp-start">Acc<sub>p</sub> &uarr;</th><th class="num">CR &darr;</th>
+                <th class="num grp-start">Acc<sub>p</sub></th><th class="num">CR</th>
+                <th class="num grp-start">Acc<sub>p</sub></th><th class="num">CR</th>
+                <th class="num grp-start">Acc<sub>p</sub></th><th class="num">CR</th>
+                <th class="num grp-start">Acc<sub>p</sub></th><th class="num">CR</th>
               </tr>
             </thead>
             <tbody>
@@ -263,18 +265,20 @@
           <table class="data">
             <thead>
               <tr>
-                <th class="num">#</th>
-                <th><span class="i18n" data-lang="en">Model</span><span class="i18n" data-lang="zh">模型</span></th>
-                <th class="num">Card.&nbsp;Acc<sub>p</sub></th>
-                <th class="num">Card.&nbsp;SeqCR</th>
-                <th class="num">Attr.&nbsp;Acc<sub>p</sub></th>
-                <th class="num">Attr.&nbsp;SeqCR</th>
-                <th class="num">Spat.&nbsp;Acc<sub>p</sub></th>
-                <th class="num">Spat.&nbsp;SeqCR</th>
-                <th class="num">Logic&nbsp;Acc<sub>p</sub></th>
-                <th class="num">Logic&nbsp;SeqCR</th>
-                <th class="num">Avg&nbsp;Acc<sub>p</sub> &uarr;</th>
-                <th class="num">Avg&nbsp;SeqCR &darr;</th>
+                <th class="num" rowspan="2">#</th>
+                <th rowspan="2"><span class="i18n" data-lang="en">Model</span><span class="i18n" data-lang="zh">模型</span></th>
+                <th colspan="2">Cardinality</th>
+                <th colspan="2">Attribute</th>
+                <th colspan="2">Spatial</th>
+                <th colspan="2">Logic</th>
+                <th colspan="2">Avg</th>
+              </tr>
+              <tr>
+                <th class="num grp-start">Acc<sub>p</sub></th><th class="num">SeqCR</th>
+                <th class="num grp-start">Acc<sub>p</sub></th><th class="num">SeqCR</th>
+                <th class="num grp-start">Acc<sub>p</sub></th><th class="num">SeqCR</th>
+                <th class="num grp-start">Acc<sub>p</sub></th><th class="num">SeqCR</th>
+                <th class="num grp-start">Acc<sub>p</sub> &uarr;</th><th class="num">SeqCR &darr;</th>
               </tr>
             </thead>
             <tbody>
