@@ -43,6 +43,7 @@ while keeping the question text and surrounding context fixed; the "original" vs
 
 ---
 
+<!-- TEMPORARILY HIDDEN — restore by removing this comment wrapper
 ## Quick start
 
 ### 1) Pull the dataset
@@ -120,6 +121,7 @@ The two templates `color_connectivity` and `maze_path` need **≥ 8192 max-token
 global tracing). Weak models can skip them with `--exclude-templates color_connectivity,maze_path`.
 
 ---
+-->
 
 ## Evaluation Results
 
