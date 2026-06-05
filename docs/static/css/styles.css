@@ -1134,3 +1134,20 @@ body.lang-zh h2 {
     transform: none;
   }
 }
+
+/* VisualFLIP results: section blocks inside data tables */
+table.data tbody tr.group-row td {
+  background: color-mix(in srgb, var(--accent) 9%, var(--canvas));
+  color: var(--accent-deep);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+}
+table.data tbody tr.group-row.sub td {
+  background: color-mix(in srgb, var(--accent) 4%, var(--canvas));
+  color: var(--fg-soft);
+  padding-left: 26px;
+}
+table.data tbody tr.group-row:hover td { color: var(--accent-deep); }
