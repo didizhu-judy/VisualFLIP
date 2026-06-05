@@ -4,10 +4,10 @@ VisualFLIP Dataset — License
 VisualFLIP ships a **mixed-license** dataset. Read both sections.
 
 --------------------------------------------------------------------
-1. Synthetic subset (515 pairs, `source == "synthetic"`) — CC BY 4.0
+1. Synthetic subset (`source == "synthetic"`) — CC BY 4.0
 --------------------------------------------------------------------
 
-The 515 synthetic image pairs and their accompanying manifest entries are
+The synthetic image pairs and their accompanying manifest entries are
 released under the Creative Commons Attribution 4.0 International License
 (CC BY 4.0):
 
@@ -18,10 +18,10 @@ commercial, provided you give appropriate credit (cite the VisualFLIP paper —
 see CITATION.cff or README.md) and indicate if changes were made.
 
 ------------------------------------------------------------------------
-2. Real-image subset (172 pairs, `source == "real_mathvision"`) — MIT
+2. Real-image subset (`source == "real_mathvision"`) — MIT
 ------------------------------------------------------------------------
 
-The 172 real-image pairs are derived from the MathVision benchmark
+The real-image pairs are derived from the MathVision benchmark
 (Wang et al., 2024), which is itself released under the MIT License. Their use
 and redistribution here are governed by that upstream license — see
 THIRD_PARTY_NOTICES.md for the verbatim upstream license text, the
@@ -33,7 +33,7 @@ sourcing notes), filter to `source == "synthetic"`:
     import json
     with open("manifest.jsonl") as f:
         synthetic_only = [json.loads(l) for l in f
-                          if json.loads(l)["source"] == "synthetic"]   # 515 pairs
+                          if json.loads(l)["source"] == "synthetic"]
 
 ------------------------------------------------------------------------
 HF dataset-page metadata

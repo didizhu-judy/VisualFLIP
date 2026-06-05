@@ -18,7 +18,7 @@ import os
 import sys
 from pathlib import Path
 
-REPO_ID = "didizhu-judy/VisualFLIP"
+REPO_ID = "DidiZhu/VisualFLIP"
 
 
 def main():

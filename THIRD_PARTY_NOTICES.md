@@ -9,7 +9,7 @@ top-level `LICENSE` / `DATA_LICENSE` of this repository where applicable.
 
 ## MathVision (Wang et al., 2024)
 
-**Scope of use in VisualFLIP.** 172 image pairs in the dataset are derived from
+**Scope of use in VisualFLIP.** Some image pairs in the dataset are derived from
 the [MathVision benchmark](https://github.com/mathllm/MATH-V) — the rows in
 `manifest.jsonl` (and `data/manifest.jsonl`) where `source == "real_mathvision"`.
 
@@ -64,7 +64,7 @@ stricter licensing requirements than MIT, restrict to the synthetic subset:
 import json
 with open("manifest.jsonl") as f:
     synthetic_only = [json.loads(l) for l in f
-                       if json.loads(l)["source"] == "synthetic"]   # 515 pairs
+                       if json.loads(l)["source"] == "synthetic"]
 ```
 
 ---
@@ -91,7 +91,7 @@ applies to the vendored CSS/JS/SVG. See that file for the full text.
 
 ## Synthetic subset (own work)
 
-The 515 pairs with `source == "synthetic"` and the
+The pairs with `source == "synthetic"` and the
 **generation code under `synthetic_pairs/`** in the originating research
 codebase are our own work, released under the licenses stated in `LICENSE`
 (code, MIT) and `DATA_LICENSE` (data, CC BY 4.0).

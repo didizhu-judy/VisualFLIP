@@ -10,9 +10,9 @@ First public release.
 
 ### Dataset
 
-- **687 paired image-flips** = 515 synthetic + 172 real-image (MathVision derived).
+- **687 paired image-flips** (synthetic + real-image, MathVision-derived).
 - **4 perturbation categories**: Cardinality (146), Attribute (273), Spatial (150), Logic (118).
-- **14 templates** = 13 synthetic generators + 1 real-image set.
+- **14 task templates** across 4 categories.
 - **140 of 687 pairs** ship an additional `irrelevant_image` control arm
   (templates: `hard_dense_count`, `attr_dense_color_count`, `layer_order`).
 - **1,514 PNGs** total (1,374 paired + 140 control), ~530 MB on Hugging Face.
@@ -40,6 +40,6 @@ First public release.
 ### Licensing
 
 - **Code:** MIT (see `LICENSE`).
-- **Synthetic data (515 pairs):** CC BY 4.0 (see `DATA_LICENSE`).
-- **Real-image data (172 pairs):** MIT, inherited from upstream MathVision
+- **Synthetic data:** CC BY 4.0 (see `DATA_LICENSE`).
+- **Real-image data:** MIT, inherited from upstream MathVision
   (see `THIRD_PARTY_NOTICES.md`).

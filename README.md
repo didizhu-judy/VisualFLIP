@@ -5,8 +5,7 @@
 **Do Predictions Depend on Task-Critical Visual Evidence in Multimodal Reasoning?**
 
 [![Project Page](https://img.shields.io/badge/Project-Page-1f6feb?style=flat&logo=github)](https://didizhu-judy.github.io/VisualFLIP/)
-[![HF Dataset](https://img.shields.io/badge/🤗%20Dataset-VisualFLIP-yellow)](https://huggingface.co/datasets/didizhu-judy/VisualFLIP)
-[![HF Space](https://img.shields.io/badge/🤗%20Space-Browse-orange)](https://huggingface.co/spaces/didizhu-judy/VisualFLIP)
+[![HF Dataset](https://img.shields.io/badge/🤗%20Dataset-VisualFLIP-yellow)](https://huggingface.co/datasets/DidiZhu/VisualFLIP)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Data: CC BY 4.0](https://img.shields.io/badge/Data-CC%20BY%204.0-blue.svg)](DATA_LICENSE)
 
@@ -36,41 +35,15 @@ answer to both images despite the gold flipping.
 
 | | |
 |---|---|
-| **Pairs** | **687** (515 synthetic + 172 real-image from MathVision) |
+| **Pairs** | **687** paired image-flips |
 | **Images** | 1,374 paired + 140 irrelevant-edit controls |
 | **Categories** | Cardinality (146), Attribute (273), Spatial (150), Logic (118) |
-| **Templates** | 13 synthetic generators + 1 real-image set |
+| **Templates** | 14 task templates across 4 categories |
 | **Metric** | Acc<sub>p</sub> ↑  /  Collapse Rate (CR) ↓ |
 | **Models evaluated in paper** | 24 (open-source / tool-augmented / closed-source) |
 
-The synthetic subset is procedurally generated, so the "original" vs "edited" label is symmetric.
 Each pair flips a single task-critical visual attribute (a count, a color, a spatial relation, …)
-while keeping question text and surrounding context fixed.
-
-<details>
-<summary><b>Per-template counts (click)</b></summary>
-
-| Category | Template | n |
-|---|---|---:|
-| Cardinality | hard_dense_count | 30 |
-| Cardinality | hard_dense_5panel | 30 |
-| Cardinality | stem_count_match | 30 |
-| Cardinality | stem_sum_match | 25 |
-| Cardinality | real-MathVision | 31 |
-| Attribute | color_connectivity | 100 |
-| Attribute | attr_dense_5panel | 50 |
-| Attribute | attr_dense_color_count | 50 |
-| Attribute | real-MathVision | 73 |
-| Spatial | layer_order | 60 |
-| Spatial | nested_containment | 30 |
-| Spatial | maze_path | 25 |
-| Spatial | real-MathVision | 35 |
-| Logic | logic_set_count | 30 |
-| Logic | narrative_multi | 30 |
-| Logic | logic_arrow_path | 25 |
-| Logic | real-MathVision | 33 |
-
-</details>
+while keeping the question text and surrounding context fixed; the "original" vs "edited" label is symmetric.
 
 ---
 
@@ -78,7 +51,7 @@ while keeping question text and surrounding context fixed.
 
 ### 1) Pull the dataset
 
-The images live on Hugging Face (≈530 MB). Mirror them locally:
+The images live on Hugging Face (≈248 MB). Mirror them locally:
 
 ```bash
 pip install -U huggingface_hub
