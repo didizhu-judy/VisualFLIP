@@ -15,7 +15,7 @@ released under the Creative Commons Attribution 4.0 International License
 
 You are free to share, adapt, and use this material for any purpose, including
 commercial, provided you give appropriate credit (cite the VisualFLIP paper —
-see CITATION.cff or README.md) and indicate if changes were made.
+see README.md) and indicate if changes were made.
 
 ------------------------------------------------------------------------
 2. Real-image subset (`source == "real_mathvision"`) — MIT
