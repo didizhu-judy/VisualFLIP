@@ -71,8 +71,8 @@ with open("manifest.jsonl") as f:
 
 ## Project page template (LLaVA-OneVision-2)
 
-`docs/index.html`, `docs/static/css/styles.css`, `docs/static/js/main.js`, and
-`docs/static/favicon.svg` are structurally adapted from the
+`docs/index.html`, `docs/static/css/styles.css`, and `docs/static/js/main.js`
+are structurally adapted from the
 [LLaVA-OneVision-2 project page](https://evolvinglmms-lab.github.io/LLaVA-OneVision-2/)
 (source: <https://github.com/EvolvingLMMs-Lab/LLaVA-OneVision-2>), distributed
 under the **Apache License 2.0**. The CSS and JS are vendored verbatim with a
@@ -85,7 +85,7 @@ content text is original to VisualFLIP.
 
 The upstream Apache-2.0 LICENSE (retrieved 2026-05-27 from
 <https://raw.githubusercontent.com/EvolvingLMMs-Lab/LLaVA-OneVision-2/main/LICENSE>)
-applies to the vendored CSS/JS/SVG. See that file for the full text.
+applies to the vendored CSS/JS. See that file for the full text.
 
 ---
 
