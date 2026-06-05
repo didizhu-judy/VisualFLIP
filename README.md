@@ -133,13 +133,7 @@ global tracing). Weak models can skip them with `--exclude-templates color_conne
   <img src="examples/table2_sequential_results.svg" width="100%"/>
 </p>
 
-The SVG tables above reproduce the paper's main Table 1 and Table 2 in README-friendly form.
-Table 1 reports independent pair accuracy and Collapse Rate across perturbation categories; Table 2
-reports the sequential two-turn diagnostic with pair accuracy and SeqCR. Full 24-model results are on the
-[project page](https://didizhu-judy.github.io/VisualFLIP/).
-
-<details>
-<summary><b>Top-10 independent-mode numeric table</b></summary>
+**Top-10 independent-mode numeric table**
 
 <!-- LEADERBOARD:START -->
 | # | Model | Year | Acc<sub>p</sub> ↑ | CR ↓ |
@@ -159,8 +153,6 @@ reports the sequential two-turn diagnostic with pair accuracy and SeqCR. Full 24
 
 > *To regenerate this top-10 table from `data/leaderboard.json` after adding new
 > results, run `python tools/sync_leaderboard.py --write`.*
-
-</details>
 
 ---
 
