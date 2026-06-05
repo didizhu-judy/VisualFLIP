@@ -192,7 +192,6 @@ are letters (A–E) or integers — compare case-insensitively, strip whitespace
   title   = {VisualFLIP: Do Predictions Depend on Task-Critical Visual Evidence in Multimodal Reasoning?},
   author  = {Zhu, Didi and Chen, Changrui and Zafeiriou, Stefanos and Deng, Jiankang},
   year    = {2026},
-  journal = {arXiv preprint},
-  note    = {Code and data: https://github.com/didizhu-judy/VisualFLIP}
+  journal = {arXiv preprint}
 }
 ```
