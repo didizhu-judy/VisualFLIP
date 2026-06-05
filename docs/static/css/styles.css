@@ -1151,3 +1151,5 @@ table.data tbody tr.group-row.sub td {
   padding-left: 26px;
 }
 table.data tbody tr.group-row:hover td { color: var(--accent-deep); }
+
+table.data td.rank { color: var(--fg-mute); font-weight: 500; font-size: 12px; }

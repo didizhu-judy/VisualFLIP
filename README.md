@@ -164,6 +164,7 @@ reports the sequential two-turn diagnostic with pair accuracy and SeqCR. Full 24
 
 ---
 
+<!-- TEMPORARILY HIDDEN — restore by removing this comment wrapper
 ## Data format
 
 `manifest.jsonl` — one record per pair:
@@ -190,6 +191,7 @@ reports the sequential two-turn diagnostic with pair accuracy and SeqCR. Full 24
 
 All paths are relative to the dataset root (the directory `download_data.py` writes into). Answers
 are letters (A–E) or integers — compare case-insensitively, strip whitespace.
+-->
 
 ## Citation
 
