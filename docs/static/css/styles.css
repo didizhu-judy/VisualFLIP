@@ -979,14 +979,9 @@ body.lang-zh h2 {
   }
 
   .topbar-actions {
-    max-width: 230px;
     gap: 4px;
-    flex-wrap: nowrap;
-    overflow: hidden;
-  }
-
-  .topbar-actions a:nth-of-type(3) {
-    display: none;
+    flex-wrap: wrap;
+    overflow: visible;
   }
 
   .topbar-actions a,

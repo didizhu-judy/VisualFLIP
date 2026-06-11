@@ -5,6 +5,7 @@
 **Do Predictions Depend on Task-Critical Visual Evidence in Multimodal Reasoning?**
 
 [![Project Page](https://img.shields.io/badge/Project-Page-1f6feb?style=flat&logo=github)](https://didizhu-judy.github.io/VisualFLIP/)
+[![arXiv](https://img.shields.io/badge/arXiv-2606.07872-b31b1b.svg)](https://arxiv.org/abs/2606.07872)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 <img src="docs/static/images/teaser.png" width="1200"/>
@@ -39,7 +40,7 @@ evidence, not the internal mechanism behind any individual answer.
 Each pair flips a single task-critical visual attribute (a count, a color, a spatial relation, …)
 while keeping the question text and surrounding context fixed; the "original" vs "edited" label is symmetric.
 
-> **Release status.** The dataset and the maintained evaluation harness will be released upon publication of the paper. The leaderboard below and the [project page](https://didizhu-judy.github.io/VisualFLIP/) reflect the results reported in the paper.
+> **Release status.** The dataset and the maintained evaluation harness will be released upon publication of the paper. The leaderboard below and the [project page](https://didizhu-judy.github.io/VisualFLIP/) reflect the results reported in the [arXiv paper](https://arxiv.org/abs/2606.07872).
 
 ---
 
@@ -73,6 +74,9 @@ The full 24-model leaderboard (independent and sequential evaluation, per-catego
   title   = {VisualFLIP: Do Predictions Depend on Task-Critical Visual Evidence in Multimodal Reasoning?},
   author  = {Zhu, Didi and Chen, Changrui and Zafeiriou, Stefanos and Deng, Jiankang},
   year    = {2026},
-  journal = {arXiv preprint}
+  journal = {arXiv preprint arXiv:2606.07872},
+  eprint  = {2606.07872},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV}
 }
 ```
